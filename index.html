@@ -5,139 +5,136 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>App de Distribución de Costos</title>
 <style>
-    body {
-        font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-    }
-    .container {
-        width: 95%;
-        max-width: 900px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-        color: #007bff;
-        text-align: center;
-    }
-    .input-section {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-    .input-section input {
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 16px;
-        flex: 1;
-        min-width: 120px;
-    }
-    .input-section button {
-        padding: 12px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .input-section button:hover {
-        background-color: #0056b3;
-    }
-    .list-section {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        justify-content: space-between;
-    }
-    .list {
-        flex: 1 1 300px;
-        background: #fafafa;
-        border-radius: 8px;
-        padding: 10px;
-        min-height: 200px;
-        transition: background-color 0.3s;
-    }
-    .list.over {
-        background-color: #d4edda;
-    }
-    ul {
-        list-style: none;
-        padding: 0;
-        min-height: 100px;
-    }
-    ul li {
-        padding: 10px;
-        border: 1px solid #ccc;
-        margin-bottom: 6px;
-        background-color: white;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        cursor: grab;
-        flex-wrap: wrap;
-    }
-    ul li:active { cursor: grabbing; }
-    ul li span { flex: 1 1 100px; }
-    ul li button {
-        padding: 4px 8px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-    }
-    .delete-btn { background-color: #dc3545; color: white; }
-    .edit-btn { background-color: #ffc107; color: black; }
-    .total-section {
-        margin-top: 10px;
-        border-top: 1px solid #ccc;
-        padding-top: 5px;
-        text-align: right;
-        font-weight: bold;
-        color: #007bff;
-    }
-    .total-general {
-        text-align: center;
-        margin-top: 15px;
-        font-weight: bold;
-        font-size: 18px;
-        color: #28a745;
-    }
-    .reequilibrar-btn, .borrar-todo-btn {
-        margin-top: 15px;
-        padding: 10px 20px;
-        background-color: #17a2b8;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-right: 10px;
-    }
-    .reequilibrar-btn:hover, .borrar-todo-btn:hover {
-        background-color: #138496;
-    }
-    @media (max-width: 600px) {
-        .list-section { flex-direction: column; }
-    }
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    width: 95%;
+    max-width: 900px;
+    margin: 15px auto;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+.input-section input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    flex: 1 1 auto;
+    min-width: 100px;
+}
+.input-section button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 0 0 auto;
+}
+.input-section button:hover { background-color: #0056b3; }
+
+.list-section {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+.list {
+    flex: 1 1 48%;
+    min-width: 100px;
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 8px;
+    min-height: 180px;
+}
+
+ul { list-style: none; padding: 0; min-height: 80px; }
+ul li {
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 4px;
+    background-color: white;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    cursor: grab;
+    flex-wrap: wrap;
+    transition: transform 0.2s;
+}
+ul li:active { cursor: grabbing; }
+ul li span { flex: 1 1 80px; font-size: 13px; }
+ul li button {
+    padding: 4px 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+}
+.delete-btn { background-color: #dc3545; color: white; }
+.edit-btn { background-color: #ffc107; color: black; }
+.total-section {
+    margin-top: 6px;
+    border-top: 1px solid #ccc;
+    padding-top: 4px;
+    text-align: right;
+    font-weight: bold;
+    color: #007bff;
+    font-size: 14px;
+}
+.total-general {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #28a745;
+}
+.reequilibrar-btn, .borrar-todo-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 6px;
+    transition: background-color 0.3s;
+}
+.reequilibrar-btn:hover, .borrar-todo-btn:hover { background-color: #138496; }
+
+/* Mobile adjustments: keep two columns side by side compact */
+@media (max-width: 500px) {
+    .list { flex: 1 1 48%; min-width: 90px; }
+    .input-section { flex-direction: column; align-items: stretch; gap: 6px; }
+    .input-section button { width: 100%; }
+    ul li span { font-size: 12px; }
+    .total-section { font-size: 12px; }
+    .total-general { font-size: 14px; }
+    .reequilibrar-btn, .borrar-todo-btn { font-size: 13px; padding: 6px 12px; }
+}
 </style>
 </head>
 <body>
 <div class="container">
-    <h1>App de Distribución de Costos</h1>
-
     <div class="input-section">
         <input type="text" id="nombreProducto" placeholder="Nombre del producto">
         <input type="number" id="costoProducto" placeholder="Costo" step="0.01">
@@ -167,18 +164,14 @@
 let productos = JSON.parse(localStorage.getItem("productos")) || [];
 let dragIndex = null;
 
-function guardarDatos() {
-    localStorage.setItem("productos", JSON.stringify(productos));
-}
+function guardarDatos() { localStorage.setItem("productos", JSON.stringify(productos)); }
 
 function agregar() {
     const nombre = document.getElementById('nombreProducto').value.trim();
     const costo = parseFloat(document.getElementById('costoProducto').value);
     if(!nombre || isNaN(costo) || costo <= 0) return;
     productos.push({ nombre, costo, lista: null });
-    guardarDatos();
-    limpiarCampos();
-    distribuirProductos();
+    guardarDatos(); limpiarCampos(); distribuirProductos();
 }
 
 function limpiarCampos() {
@@ -187,9 +180,7 @@ function limpiarCampos() {
 }
 
 function eliminarProducto(index) {
-    productos.splice(index,1);
-    guardarDatos();
-    distribuirProductos();
+    productos.splice(index,1); guardarDatos(); distribuirProductos();
 }
 
 function editarProducto(index) {
@@ -197,16 +188,14 @@ function editarProducto(index) {
     const nuevoCosto = parseFloat(prompt("Nuevo costo:", productos[index].costo));
     if(nuevoNombre && !isNaN(nuevoCosto) && nuevoCosto>0){
         productos[index] = { ...productos[index], nombre:nuevoNombre.trim(), costo:nuevoCosto };
-        guardarDatos();
-        distribuirProductos();
+        guardarDatos(); distribuirProductos();
     }
 }
 
 function distribuirProductos() {
     const lista1 = document.getElementById('lista1');
     const lista2 = document.getElementById('lista2');
-    lista1.innerHTML = '';
-    lista2.innerHTML = '';
+    lista1.innerHTML = ''; lista2.innerHTML = '';
 
     let total1 = 0, total2 = 0;
 
@@ -217,26 +206,19 @@ function distribuirProductos() {
         li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
 
         const btnEdit = document.createElement("button");
-        btnEdit.textContent = "Editar";
-        btnEdit.classList.add("edit-btn");
+        btnEdit.textContent = "Editar"; btnEdit.classList.add("edit-btn");
         btnEdit.onclick = () => editarProducto(i);
 
         const btnDel = document.createElement("button");
-        btnDel.textContent = "Eliminar";
-        btnDel.classList.add("delete-btn");
+        btnDel.textContent = "Eliminar"; btnDel.classList.add("delete-btn");
         btnDel.onclick = () => eliminarProducto(i);
 
-        li.appendChild(btnEdit);
-        li.appendChild(btnDel);
+        li.appendChild(btnEdit); li.appendChild(btnDel);
 
         if(p.lista==="lista1" || (p.lista===null && total1<=total2)){
-            p.lista="lista1";
-            lista1.appendChild(li);
-            total1 += p.costo;
+            p.lista="lista1"; lista1.appendChild(li); total1 += p.costo;
         }else{
-            p.lista="lista2";
-            lista2.appendChild(li);
-            total2 += p.costo;
+            p.lista="lista2"; lista2.appendChild(li); total2 += p.costo;
         }
     });
 
@@ -264,15 +246,12 @@ function reequilibrar(){
         if(total1<=total2){ p.lista="lista1"; total1+=p.costo; }
         else{ p.lista="lista2"; total2+=p.costo; }
     });
-    guardarDatos();
-    distribuirProductos();
+    guardarDatos(); distribuirProductos();
 }
 
 function borrarTodo(){
     if(confirm("¿Estás seguro que quieres borrar todos los productos?")){
-        productos=[];
-        guardarDatos();
-        distribuirProductos();
+        productos=[]; guardarDatos(); distribuirProductos();
     }
 }
 
