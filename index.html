@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<!-- Se deshabilita zoom en móviles -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>App de Distribución de Costos</title>
 <style>
@@ -55,11 +54,10 @@ body {
 .list-section {
     display: flex;
     gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    width: 100%;
 }
 .list {
-    flex: 0 0 48%;
+    flex: 1 1 48%;
     background: #fafafa;
     border-radius: 6px;
     padding: 8px;
@@ -91,7 +89,7 @@ ul li button {
     font-size: 11px;
 }
 .delete-btn { background-color: #dc3545; color: white; }
-.edit-btn { background-color: #ffc107; color: black; }
+
 .total-section {
     margin-top: 6px;
     border-top: 1px solid #ccc;
@@ -122,9 +120,9 @@ ul li button {
 }
 .reequilibrar-btn:hover, .borrar-todo-btn:hover { background-color: #138496; }
 
-/* Mobile ultra-compact adjustments */
+/* Mobile adjustments */
 @media (max-width: 500px) {
-    .list { flex: 0 0 200px; min-width: 200px; }
+    .list { flex: 1 1 48%; min-width: 0; } 
     .input-section { flex-direction: column; align-items: stretch; gap: 6px; }
     .input-section button { width: 100%; }
     ul li span { font-size: 12px; }
@@ -184,15 +182,6 @@ function eliminarProducto(index) {
     productos.splice(index,1); guardarDatos(); distribuirProductos();
 }
 
-function editarProducto(index) {
-    const nuevoNombre = prompt("Nuevo nombre:", productos[index].nombre);
-    const nuevoCosto = parseFloat(prompt("Nuevo costo:", productos[index].costo));
-    if(nuevoNombre && !isNaN(nuevoCosto) && nuevoCosto>0){
-        productos[index] = { ...productos[index], nombre:nuevoNombre.trim(), costo:nuevoCosto };
-        guardarDatos(); distribuirProductos();
-    }
-}
-
 function distribuirProductos() {
     const lista1 = document.getElementById('lista1');
     const lista2 = document.getElementById('lista2');
@@ -206,15 +195,11 @@ function distribuirProductos() {
         li.ondragstart = e => iniciarArrastre(e,i);
         li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
 
-        const btnEdit = document.createElement("button");
-        btnEdit.textContent = "Editar"; btnEdit.classList.add("edit-btn");
-        btnEdit.onclick = () => editarProducto(i);
-
         const btnDel = document.createElement("button");
         btnDel.textContent = "Eliminar"; btnDel.classList.add("delete-btn");
         btnDel.onclick = () => eliminarProducto(i);
 
-        li.appendChild(btnEdit); li.appendChild(btnDel);
+        li.appendChild(btnDel);
 
         if(p.lista==="lista1" || (p.lista===null && total1<=total2)){
             p.lista="lista1"; lista1.appendChild(li); total1 += p.costo;
