@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>App de Distribución de Costos</title>
 <style>
 body {
@@ -54,10 +54,10 @@ body {
 .list-section {
     display: flex;
     gap: 8px;
-    width: 100%;
+    justify-content: space-between;
 }
 .list {
-    flex: 1 1 48%;
+    flex: 0 0 48%;
     background: #fafafa;
     border-radius: 6px;
     padding: 6px;
@@ -120,6 +120,7 @@ ul li button {
 .reequilibrar-btn:hover, .borrar-todo-btn:hover { background-color: #138496; }
 
 @media (max-width: 500px) {
+    .list { flex: 0 0 48%; } 
     .input-section { flex-direction: column; align-items: stretch; gap: 6px; }
     .input-section button { width: 100%; }
     ul li span { font-size: 12px; }
@@ -138,12 +139,12 @@ ul li button {
     </div>
 
     <div class="list-section">
-        <div class="list" id="area1" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista1')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
+        <div class="list" id="area1" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista1')">
             <h2>Lista 1</h2>
             <ul id="lista1"></ul>
             <div class="total-section">Total: $<span id="totalLista1">0</span></div>
         </div>
-        <div class="list" id="area2" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista2')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
+        <div class="list" id="area2" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista2')">
             <h2>Lista 2</h2>
             <ul id="lista2"></ul>
             <div class="total-section">Total: $<span id="totalLista2">0</span></div>
@@ -173,54 +174,61 @@ function agregar() {
 function limpiarCampos() {
     document.getElementById('nombreProducto').value = '';
     document.getElementById('costoProducto').value = '';
+    document.getElementById('nombreProducto').focus();
 }
 
-function eliminarProducto(index) {
+function eliminarProducto(index){
     productos.splice(index,1); guardarDatos(); distribuirProductos();
 }
 
-function distribuirProductos() {
+function distribuirProductos(){
     const lista1 = document.getElementById('lista1');
     const lista2 = document.getElementById('lista2');
     lista1.innerHTML = ''; lista2.innerHTML = '';
 
-    let total1 = 0, total2 = 0;
+    let total1=0, total2=0;
 
     productos.forEach((p,i)=>{
         const li = document.createElement("li");
         li.draggable = true;
-        li.ondragstart = e => iniciarArrastre(e,i);
+        li.ondragstart = e=>iniciarArrastre(e,i);
         li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
 
         const btnDel = document.createElement("button");
-        btnDel.textContent = "Eliminar"; btnDel.classList.add("delete-btn");
-        btnDel.onclick = (e) => { e.stopPropagation(); eliminarProducto(i); };
+        btnDel.textContent="Eliminar"; btnDel.classList.add("delete-btn");
+        btnDel.onclick = e => { e.stopPropagation(); eliminarProducto(i); }
 
         li.appendChild(btnDel);
 
-        if(p.lista==="lista1" || (p.lista===null && total1<=total2)){
-            p.lista="lista1"; lista1.appendChild(li); total1 += p.costo;
+        // Touch para mover producto a otra columna
+        li.addEventListener('touchstart', e=>{
+            if(e.target.tagName!=='BUTTON'){
+                p.lista = (p.lista==='lista1') ? 'lista2' : 'lista1';
+                guardarDatos(); distribuirProductos();
+            }
+        });
+
+        if(p.lista==='lista1'|| (p.lista===null && total1<=total2)){
+            p.lista='lista1'; lista1.appendChild(li); total1+=p.costo;
         }else{
-            p.lista="lista2"; lista2.appendChild(li); total2 += p.costo;
+            p.lista='lista2'; lista2.appendChild(li); total2+=p.costo;
         }
     });
 
-    document.getElementById('totalLista1').textContent = total1;
-    document.getElementById('totalLista2').textContent = total2;
-    document.getElementById('totalGeneral').textContent = total1+total2;
+    document.getElementById('totalLista1').textContent=total1;
+    document.getElementById('totalLista2').textContent=total2;
+    document.getElementById('totalGeneral').textContent=total1+total2;
 
     guardarDatos();
 }
 
+// Drag & Drop desktop
 function iniciarArrastre(event,index){ dragIndex=index; }
 function permitirSoltar(event){ event.preventDefault(); }
 function soltar(event,listaDestino){
     event.preventDefault();
     if(dragIndex!==null){ productos[dragIndex].lista=listaDestino; guardarDatos(); distribuirProductos(); dragIndex=null; }
-    quitarResaltado(event);
 }
-function resaltar(event){ event.currentTarget.classList.add("over"); }
-function quitarResaltado(event){ event.currentTarget.classList.remove("over"); }
 
 function reequilibrar(){
     productos.sort((a,b)=>b.costo-a.costo);
@@ -238,14 +246,12 @@ function borrarTodo(){
     }
 }
 
-// ** Enter en Nombre -> foco en Costo **
-document.getElementById('nombreProducto').addEventListener('keypress', function(e){
-    if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('costoProducto').focus(); }
+// Enter en campos
+document.getElementById('nombreProducto').addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); document.getElementById('costoProducto').focus(); }
 });
-
-// ** Enter en Costo -> agregar producto **
-document.getElementById('costoProducto').addEventListener('keypress', function(e){
-    if(e.key === 'Enter'){ agregar(); }
+document.getElementById('costoProducto').addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); agregar(); }
 });
 
 distribuirProductos();
