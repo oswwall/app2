@@ -9,22 +9,21 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(120deg, #f6f8fc, #e9eff5);
+    background-color: #f4f4f4;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     min-height: 100vh;
 }
 .container {
     width: 95%;
     max-width: 900px;
-    margin: 20px auto;
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    margin: 15px auto;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-
-/* Input + botón integrados */
 .input-section {
     display: flex;
     flex-wrap: wrap;
@@ -32,52 +31,44 @@ body {
     margin-bottom: 15px;
     align-items: center;
 }
-.input-wrapper {
-    display: flex;
-    flex: 1 1 auto;
-    gap: 6px;
-}
-.input-wrapper input {
+.input-section input {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 14px;
     flex: 1 1 auto;
+    min-width: 100px;
 }
-.input-wrapper button {
+.input-section button {
     padding: 10px 16px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s;
+    flex: 0 0 auto;
 }
-.input-wrapper button:hover { 
-    background-color: #0056b3; 
-    transform: translateY(-1px);
-}
+.input-section button:hover { background-color: #0056b3; }
 
 .list-section {
     display: flex;
-    gap: 10px;
-    width: 100%;
+    gap: 8px;
 }
 .list {
     flex: 1 1 48%;
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 8px; /* reducido */
-    min-height: 200px;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 6px;
+    min-height: 180px;
 }
 
 ul { list-style: none; padding: 0; min-height: 80px; }
 ul li {
-    padding: 6px; /* reducido */
-    border: 1px solid #ddd;
-    margin-bottom: 5px;
-    background-color: #ffffff;
+    padding: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 4px;
+    background-color: white;
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
@@ -85,22 +76,18 @@ ul li {
     gap: 6px;
     cursor: grab;
     flex-wrap: wrap;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s;
 }
 ul li:active { cursor: grabbing; }
-ul li:hover { box-shadow: 0 3px 8px rgba(0,0,0,0.1); transform: translateY(-1px); }
-ul li span { flex: 1 1 80px; font-size: 14px; }
-
+ul li span { flex: 1 1 80px; font-size: 13px; }
 ul li button {
     padding: 4px 6px;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 11px;
 }
-.delete-btn { background-color: #dc3545; color: white; transition: background-color 0.3s; }
-.delete-btn:hover { background-color: #a71d2a; }
-
+.delete-btn { background-color: #dc3545; color: white; }
 .total-section {
     margin-top: 6px;
     border-top: 1px solid #ccc;
@@ -112,7 +99,7 @@ ul li button {
 }
 .total-general {
     text-align: center;
-    margin-top: 12px;
+    margin-top: 10px;
     font-weight: bold;
     font-size: 16px;
     color: #28a745;
@@ -123,22 +110,21 @@ ul li button {
     background-color: #17a2b8;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    margin-right: 8px;
-    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 6px;
+    transition: background-color 0.3s;
 }
-.reequilibrar-btn:hover, .borrar-todo-btn:hover { background-color: #138496; transform: translateY(-1px); }
+.reequilibrar-btn:hover, .borrar-todo-btn:hover { background-color: #138496; }
 
-/* Mobile adjustments */
+/* Mobile ultra-compact adjustments */
 @media (max-width: 500px) {
-    .list { flex: 1 1 48%; } 
+    .list { flex: 1 1 48%; } /* columnas visibles completas */
     .input-section { flex-direction: column; align-items: stretch; gap: 6px; }
-    .input-wrapper { flex-direction: column; }
-    .input-wrapper button { width: 100%; }
-    ul li span { font-size: 13px; }
-    .total-section { font-size: 13px; }
+    .input-section button { width: 100%; }
+    ul li span { font-size: 12px; }
+    .total-section { font-size: 12px; }
     .total-general { font-size: 14px; }
     .reequilibrar-btn, .borrar-todo-btn { font-size: 13px; padding: 6px 12px; }
 }
@@ -147,21 +133,17 @@ ul li button {
 <body>
 <div class="container">
     <div class="input-section">
-        <div class="input-wrapper">
-            <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-            <input type="number" id="costoProducto" placeholder="Costo" step="0.01">
-            <button onclick="agregar()">Agregar</button>
-        </div>
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <input type="number" id="costoProducto" placeholder="Costo" step="0.01">
+        <button onclick="agregar()">Agregar</button>
     </div>
 
     <div class="list-section">
-        <div class="list" id="area1">
-            <h2>Lista 1</h2>
+        <div class="list" id="area1" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista1')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
             <ul id="lista1"></ul>
             <div class="total-section">Total: $<span id="totalLista1">0</span></div>
         </div>
-        <div class="list" id="area2">
-            <h2>Lista 2</h2>
+        <div class="list" id="area2" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista2')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
             <ul id="lista2"></ul>
             <div class="total-section">Total: $<span id="totalLista2">0</span></div>
         </div>
@@ -175,6 +157,7 @@ ul li button {
 
 <script>
 let productos = JSON.parse(localStorage.getItem("productos")) || [];
+let dragIndex = null;
 
 function guardarDatos() { localStorage.setItem("productos", JSON.stringify(productos)); }
 
@@ -185,6 +168,10 @@ function agregar() {
     productos.push({ nombre, costo, lista: null });
     guardarDatos(); limpiarCampos(); distribuirProductos();
 }
+
+document.getElementById('costoProducto').addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){ agregar(); }
+});
 
 function limpiarCampos() {
     document.getElementById('nombreProducto').value = '';
@@ -204,17 +191,19 @@ function distribuirProductos() {
 
     productos.forEach((p,i)=>{
         const li = document.createElement("li");
+        li.draggable = true;
+        li.ondragstart = e => iniciarArrastre(e,i);
         li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
-        const btnDel = document.createElement("button");
-        btnDel.textContent = "Eliminar"; btnDel.classList.add("delete-btn");
-        btnDel.onclick = () => eliminarProducto(i);
-        li.appendChild(btnDel);
 
-        // función para móviles: tap mueve a la otra lista
-        li.ontouchstart = () => {
-            p.lista = (p.lista==="lista1") ? "lista2" : "lista1";
-            distribuirProductos();
-        };
+        const btnDel = document.createElement("button");
+        btnDel.textContent = "Eliminar"; 
+        btnDel.classList.add("delete-btn");
+        // Evita arrastre al tocar el botón
+        btnDel.addEventListener('touchstart', e => e.stopPropagation());
+        btnDel.addEventListener('mousedown', e => e.stopPropagation());
+        btnDel.onclick = () => eliminarProducto(i);
+
+        li.appendChild(btnDel);
 
         if(p.lista==="lista1" || (p.lista===null && total1<=total2)){
             p.lista="lista1"; lista1.appendChild(li); total1 += p.costo;
@@ -229,6 +218,16 @@ function distribuirProductos() {
 
     guardarDatos();
 }
+
+function iniciarArrastre(event,index){ dragIndex=index; }
+function permitirSoltar(event){ event.preventDefault(); }
+function soltar(event,listaDestino){
+    event.preventDefault();
+    if(dragIndex!==null){ productos[dragIndex].lista=listaDestino; guardarDatos(); distribuirProductos(); dragIndex=null; }
+    quitarResaltado(event);
+}
+function resaltar(event){ event.currentTarget.classList.add("over"); }
+function quitarResaltado(event){ event.currentTarget.classList.remove("over"); }
 
 function reequilibrar(){
     productos.sort((a,b)=>b.costo-a.costo);
