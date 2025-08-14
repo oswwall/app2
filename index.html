@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Se deshabilita zoom en móviles -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>App de Distribución de Costos</title>
 <style>
 body {
@@ -54,11 +55,11 @@ body {
 .list-section {
     display: flex;
     gap: 8px;
-    justify-content: space-between;
+    overflow-x: auto;
+    padding-bottom: 10px;
 }
 .list {
-    flex: 1 1 48%;
-    min-width: 100px;
+    flex: 0 0 48%;
     background: #fafafa;
     border-radius: 6px;
     padding: 8px;
@@ -121,9 +122,9 @@ ul li button {
 }
 .reequilibrar-btn:hover, .borrar-todo-btn:hover { background-color: #138496; }
 
-/* Mobile adjustments: keep two columns side by side compact */
+/* Mobile ultra-compact adjustments */
 @media (max-width: 500px) {
-    .list { flex: 1 1 48%; min-width: 90px; }
+    .list { flex: 0 0 200px; min-width: 200px; }
     .input-section { flex-direction: column; align-items: stretch; gap: 6px; }
     .input-section button { width: 100%; }
     ul li span { font-size: 12px; }
