@@ -13,15 +13,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
     }
     .container {
+        width: 95%;
         max-width: 900px;
-        margin: 40px auto;
+        margin: 20px auto;
         padding: 20px;
         background-color: white;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     h1, h2 {
         color: #007bff;
@@ -29,6 +30,7 @@
     }
     .input-section {
         display: flex;
+        flex-wrap: wrap;
         gap: 10px;
         margin-bottom: 20px;
     }
@@ -38,6 +40,7 @@
         border-radius: 8px;
         font-size: 16px;
         flex: 1;
+        min-width: 120px;
     }
     .input-section button {
         padding: 12px 20px;
@@ -53,11 +56,12 @@
     }
     .list-section {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         gap: 10px;
+        justify-content: space-between;
     }
     .list {
-        flex: 1;
+        flex: 1 1 300px;
         background: #fafafa;
         border-radius: 8px;
         padding: 10px;
@@ -65,7 +69,7 @@
         transition: background-color 0.3s;
     }
     .list.over {
-        background-color: #d4edda; /* Verde claro al arrastrar encima */
+        background-color: #d4edda;
     }
     ul {
         list-style: none;
@@ -83,13 +87,10 @@
         align-items: center;
         gap: 8px;
         cursor: grab;
+        flex-wrap: wrap;
     }
-    ul li:active {
-        cursor: grabbing;
-    }
-    ul li span {
-        flex: 1;
-    }
+    ul li:active { cursor: grabbing; }
+    ul li span { flex: 1 1 100px; }
     ul li button {
         padding: 4px 8px;
         border: none;
@@ -114,7 +115,7 @@
         font-size: 18px;
         color: #28a745;
     }
-    .reequilibrar-btn {
+    .reequilibrar-btn, .borrar-todo-btn {
         margin-top: 15px;
         padding: 10px 20px;
         background-color: #17a2b8;
@@ -123,9 +124,13 @@
         border-radius: 8px;
         cursor: pointer;
         font-size: 16px;
+        margin-right: 10px;
     }
-    .reequilibrar-btn:hover {
+    .reequilibrar-btn:hover, .borrar-todo-btn:hover {
         background-color: #138496;
+    }
+    @media (max-width: 600px) {
+        .list-section { flex-direction: column; }
     }
 </style>
 </head>
@@ -140,159 +145,138 @@
     </div>
 
     <div class="list-section">
-        <div class="list" id="area1" ondragover="permitirSoltar(event)" ondrop="soltar(event, 'lista1')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
+        <div class="list" id="area1" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista1')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
             <h2>Lista 1</h2>
             <ul id="lista1"></ul>
-            <div class="total-section">
-                Total: $<span id="totalLista1">0</span>
-            </div>
+            <div class="total-section">Total: $<span id="totalLista1">0</span></div>
         </div>
-        <div class="list" id="area2" ondragover="permitirSoltar(event)" ondrop="soltar(event, 'lista2')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
+        <div class="list" id="area2" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista2')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
             <h2>Lista 2</h2>
             <ul id="lista2"></ul>
-            <div class="total-section">
-                Total: $<span id="totalLista2">0</span>
-            </div>
+            <div class="total-section">Total: $<span id="totalLista2">0</span></div>
         </div>
     </div>
 
-    <div class="total-general">
-        Total General: $<span id="totalGeneral">0</span>
-    </div>
+    <div class="total-general">Total General: $<span id="totalGeneral">0</span></div>
 
     <button class="reequilibrar-btn" onclick="reequilibrar()">Reequilibrar</button>
+    <button class="borrar-todo-btn" onclick="borrarTodo()">Borrar Todos</button>
 </div>
 
 <script>
-    let productos = JSON.parse(localStorage.getItem("productos")) || [];
-    let dragIndex = null;
+let productos = JSON.parse(localStorage.getItem("productos")) || [];
+let dragIndex = null;
 
-    function guardarDatos() {
-        localStorage.setItem("productos", JSON.stringify(productos));
-    }
+function guardarDatos() {
+    localStorage.setItem("productos", JSON.stringify(productos));
+}
 
-    function agregar() {
-        const nombre = document.getElementById('nombreProducto').value.trim();
-        const costo = parseFloat(document.getElementById('costoProducto').value);
-        if (!nombre || isNaN(costo) || costo <= 0) return;
-
-        productos.push({ nombre, costo, lista: null });
-        guardarDatos();
-        limpiarCampos();
-        distribuirProductos();
-    }
-
-    function limpiarCampos() {
-        document.getElementById('nombreProducto').value = '';
-        document.getElementById('costoProducto').value = '';
-    }
-
-    function eliminarProducto(index) {
-        productos.splice(index, 1);
-        guardarDatos();
-        distribuirProductos();
-    }
-
-    function editarProducto(index) {
-        const nuevoNombre = prompt("Nuevo nombre:", productos[index].nombre);
-        const nuevoCosto = parseFloat(prompt("Nuevo costo:", productos[index].costo));
-        if (nuevoNombre && !isNaN(nuevoCosto) && nuevoCosto > 0) {
-            productos[index] = { ...productos[index], nombre: nuevoNombre.trim(), costo: nuevoCosto };
-            guardarDatos();
-            distribuirProductos();
-        }
-    }
-
-    function distribuirProductos() {
-        const lista1 = document.getElementById('lista1');
-        const lista2 = document.getElementById('lista2');
-        lista1.innerHTML = '';
-        lista2.innerHTML = '';
-
-        let total1 = 0, total2 = 0;
-
-        productos.forEach((p, i) => {
-            const li = document.createElement("li");
-            li.draggable = true;
-            li.ondragstart = e => iniciarArrastre(e, i);
-            li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
-
-            const btnEdit = document.createElement("button");
-            btnEdit.textContent = "Editar";
-            btnEdit.classList.add("edit-btn");
-            btnEdit.onclick = () => editarProducto(i);
-
-            const btnDel = document.createElement("button");
-            btnDel.textContent = "Eliminar";
-            btnDel.classList.add("delete-btn");
-            btnDel.onclick = () => eliminarProducto(i);
-
-            li.appendChild(btnEdit);
-            li.appendChild(btnDel);
-
-            if (p.lista === "lista1" || (p.lista === null && total1 <= total2)) {
-                p.lista = "lista1";
-                lista1.appendChild(li);
-                total1 += p.costo;
-            } else {
-                p.lista = "lista2";
-                lista2.appendChild(li);
-                total2 += p.costo;
-            }
-        });
-
-        document.getElementById('totalLista1').textContent = total1;
-        document.getElementById('totalLista2').textContent = total2;
-        document.getElementById('totalGeneral').textContent = total1 + total2;
-
-        guardarDatos();
-    }
-
-    function iniciarArrastre(event, index) {
-        dragIndex = index;
-    }
-
-    function permitirSoltar(event) {
-        event.preventDefault();
-    }
-
-    function soltar(event, listaDestino) {
-        event.preventDefault();
-        if (dragIndex !== null) {
-            productos[dragIndex].lista = listaDestino;
-            guardarDatos();
-            distribuirProductos();
-            dragIndex = null;
-        }
-        quitarResaltado(event);
-    }
-
-    function resaltar(event) {
-        event.currentTarget.classList.add("over");
-    }
-
-    function quitarResaltado(event) {
-        event.currentTarget.classList.remove("over");
-    }
-
-    function reequilibrar() {
-        // Ordena por costo descendente y distribuye alternando para equilibrar
-        productos.sort((a, b) => b.costo - a.costo);
-        let total1 = 0, total2 = 0;
-        productos.forEach(p => {
-            if (total1 <= total2) {
-                p.lista = "lista1";
-                total1 += p.costo;
-            } else {
-                p.lista = "lista2";
-                total2 += p.costo;
-            }
-        });
-        guardarDatos();
-        distribuirProductos();
-    }
-
+function agregar() {
+    const nombre = document.getElementById('nombreProducto').value.trim();
+    const costo = parseFloat(document.getElementById('costoProducto').value);
+    if(!nombre || isNaN(costo) || costo <= 0) return;
+    productos.push({ nombre, costo, lista: null });
+    guardarDatos();
+    limpiarCampos();
     distribuirProductos();
+}
+
+function limpiarCampos() {
+    document.getElementById('nombreProducto').value = '';
+    document.getElementById('costoProducto').value = '';
+}
+
+function eliminarProducto(index) {
+    productos.splice(index,1);
+    guardarDatos();
+    distribuirProductos();
+}
+
+function editarProducto(index) {
+    const nuevoNombre = prompt("Nuevo nombre:", productos[index].nombre);
+    const nuevoCosto = parseFloat(prompt("Nuevo costo:", productos[index].costo));
+    if(nuevoNombre && !isNaN(nuevoCosto) && nuevoCosto>0){
+        productos[index] = { ...productos[index], nombre:nuevoNombre.trim(), costo:nuevoCosto };
+        guardarDatos();
+        distribuirProductos();
+    }
+}
+
+function distribuirProductos() {
+    const lista1 = document.getElementById('lista1');
+    const lista2 = document.getElementById('lista2');
+    lista1.innerHTML = '';
+    lista2.innerHTML = '';
+
+    let total1 = 0, total2 = 0;
+
+    productos.forEach((p,i)=>{
+        const li = document.createElement("li");
+        li.draggable = true;
+        li.ondragstart = e => iniciarArrastre(e,i);
+        li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
+
+        const btnEdit = document.createElement("button");
+        btnEdit.textContent = "Editar";
+        btnEdit.classList.add("edit-btn");
+        btnEdit.onclick = () => editarProducto(i);
+
+        const btnDel = document.createElement("button");
+        btnDel.textContent = "Eliminar";
+        btnDel.classList.add("delete-btn");
+        btnDel.onclick = () => eliminarProducto(i);
+
+        li.appendChild(btnEdit);
+        li.appendChild(btnDel);
+
+        if(p.lista==="lista1" || (p.lista===null && total1<=total2)){
+            p.lista="lista1";
+            lista1.appendChild(li);
+            total1 += p.costo;
+        }else{
+            p.lista="lista2";
+            lista2.appendChild(li);
+            total2 += p.costo;
+        }
+    });
+
+    document.getElementById('totalLista1').textContent = total1;
+    document.getElementById('totalLista2').textContent = total2;
+    document.getElementById('totalGeneral').textContent = total1+total2;
+
+    guardarDatos();
+}
+
+function iniciarArrastre(event,index){ dragIndex=index; }
+function permitirSoltar(event){ event.preventDefault(); }
+function soltar(event,listaDestino){
+    event.preventDefault();
+    if(dragIndex!==null){ productos[dragIndex].lista=listaDestino; guardarDatos(); distribuirProductos(); dragIndex=null; }
+    quitarResaltado(event);
+}
+function resaltar(event){ event.currentTarget.classList.add("over"); }
+function quitarResaltado(event){ event.currentTarget.classList.remove("over"); }
+
+function reequilibrar(){
+    productos.sort((a,b)=>b.costo-a.costo);
+    let total1=0,total2=0;
+    productos.forEach(p=>{
+        if(total1<=total2){ p.lista="lista1"; total1+=p.costo; }
+        else{ p.lista="lista2"; total2+=p.costo; }
+    });
+    guardarDatos();
+    distribuirProductos();
+}
+
+function borrarTodo(){
+    if(confirm("¿Estás seguro que quieres borrar todos los productos?")){
+        productos=[];
+        guardarDatos();
+        distribuirProductos();
+    }
+}
+
+distribuirProductos();
 </script>
 </body>
 </html>
