@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>App de Distribución de Costos</title>
 <style>
 body {
@@ -19,7 +19,7 @@ body {
     width: 95%;
     max-width: 900px;
     margin: 15px auto;
-    padding: 10px;
+    padding: 15px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -54,6 +54,7 @@ body {
 .list-section {
     display: flex;
     gap: 8px;
+    width: 100%;
 }
 .list {
     flex: 1 1 48%;
@@ -118,9 +119,7 @@ ul li button {
 }
 .reequilibrar-btn:hover, .borrar-todo-btn:hover { background-color: #138496; }
 
-/* Mobile ultra-compact adjustments */
 @media (max-width: 500px) {
-    .list { flex: 1 1 48%; } /* columnas visibles completas */
     .input-section { flex-direction: column; align-items: stretch; gap: 6px; }
     .input-section button { width: 100%; }
     ul li span { font-size: 12px; }
@@ -140,10 +139,12 @@ ul li button {
 
     <div class="list-section">
         <div class="list" id="area1" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista1')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
+            <h2>Lista 1</h2>
             <ul id="lista1"></ul>
             <div class="total-section">Total: $<span id="totalLista1">0</span></div>
         </div>
         <div class="list" id="area2" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista2')" ondragenter="resaltar(event)" ondragleave="quitarResaltado(event)">
+            <h2>Lista 2</h2>
             <ul id="lista2"></ul>
             <div class="total-section">Total: $<span id="totalLista2">0</span></div>
         </div>
@@ -169,10 +170,6 @@ function agregar() {
     guardarDatos(); limpiarCampos(); distribuirProductos();
 }
 
-document.getElementById('costoProducto').addEventListener('keypress', function(e){
-    if(e.key === 'Enter'){ agregar(); }
-});
-
 function limpiarCampos() {
     document.getElementById('nombreProducto').value = '';
     document.getElementById('costoProducto').value = '';
@@ -196,12 +193,8 @@ function distribuirProductos() {
         li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
 
         const btnDel = document.createElement("button");
-        btnDel.textContent = "Eliminar"; 
-        btnDel.classList.add("delete-btn");
-        // Evita arrastre al tocar el botón
-        btnDel.addEventListener('touchstart', e => e.stopPropagation());
-        btnDel.addEventListener('mousedown', e => e.stopPropagation());
-        btnDel.onclick = () => eliminarProducto(i);
+        btnDel.textContent = "Eliminar"; btnDel.classList.add("delete-btn");
+        btnDel.onclick = (e) => { e.stopPropagation(); eliminarProducto(i); };
 
         li.appendChild(btnDel);
 
@@ -244,6 +237,16 @@ function borrarTodo(){
         productos=[]; guardarDatos(); distribuirProductos();
     }
 }
+
+// ** Enter en Nombre -> foco en Costo **
+document.getElementById('nombreProducto').addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('costoProducto').focus(); }
+});
+
+// ** Enter en Costo -> agregar producto **
+document.getElementById('costoProducto').addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){ agregar(); }
+});
 
 distribuirProductos();
 </script>
