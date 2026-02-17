@@ -24,29 +24,39 @@ body {
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
+
+/* 🔥 CAMBIO AQUÍ */
 .input-section {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
 }
+
 .input-section input {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
-    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
+
 .input-section button {
-    padding: 12px 20px;
+    padding: 12px;
     background-color: #6366f1;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    width: 100%;
 }
+
 .input-section button:hover {
     background-color: #4f46e5;
 }
+/* 🔥 FIN CAMBIO */
+
 .list-section {
     display: flex;
     gap: 12px;
@@ -261,8 +271,6 @@ function borrarTodo(){
         distribuirProductos();
     }
 }
-
-/* 🔥 ENTER funcional */
 
 document.getElementById('nombreProducto').addEventListener('keydown', function(e){
     if(e.key === "Enter"){
