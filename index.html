@@ -38,7 +38,6 @@ body {
     font-size: 15px;
     flex: 1 1 auto;
     min-width: 100px;
-    transition: border-color 0.2s;
 }
 .input-section input:focus {
     border-color: #6366f1;
@@ -51,12 +50,9 @@ body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-    flex: 0 0 auto;
 }
 .input-section button:hover {
     background-color: #4f46e5;
-    transform: translateY(-1px);
 }
 
 .list-section {
@@ -70,10 +66,10 @@ body {
     border-radius: 10px;
     padding: 6px;
     min-height: 180px;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
 }
 
 ul { list-style: none; padding: 0; min-height: 80px; }
+
 ul li {
     padding: 7px;
     border: 1px solid #d1d5db;
@@ -85,12 +81,9 @@ ul li {
     align-items: center;
     gap: 6px;
     cursor: grab;
-    flex-wrap: wrap;
-    transition: transform 0.2s, box-shadow 0.2s;
 }
-ul li:active { cursor: grabbing; }
-ul li:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.08); }
-ul li span { flex: 1 1 80px; font-size: 14px; color: #1f2937; }
+
+ul li span { flex: 1; font-size: 14px; }
 
 ul li button {
     padding: 4px 8px;
@@ -99,7 +92,7 @@ ul li button {
     cursor: pointer;
     font-size: 12px;
 }
-.delete-btn { background-color: #ef4444; color: white; transition: background-color 0.3s; }
+.delete-btn { background-color: #ef4444; color: white; }
 .delete-btn:hover { background-color: #dc2626; }
 
 .total-section {
@@ -109,7 +102,6 @@ ul li button {
     text-align: right;
     font-weight: bold;
     color: #4f46e5;
-    font-size: 14px;
 }
 .total-general {
     text-align: center;
@@ -140,23 +132,10 @@ ul li button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
     margin-right: 6px;
-    transition: background-color 0.3s, transform 0.1s;
 }
 .reequilibrar-btn:hover, .borrar-todo-btn:hover {
     background-color: #2563eb;
-    transform: translateY(-1px);
-}
-
-@media (max-width: 500px) {
-    .list { flex: 0 0 44%; }
-    .input-section { flex-direction: column; align-items: stretch; gap: 8px; }
-    .input-section button { width: 100%; }
-    ul li span { font-size: 13px; }
-    .total-section { font-size: 13px; }
-    .total-general { font-size: 15px; }
-    .reequilibrar-btn, .borrar-todo-btn { font-size: 13px; padding: 8px 14px; }
 }
 </style>
 </head>
@@ -164,7 +143,7 @@ ul li button {
 <div class="container">
     <div class="input-section">
         <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-        <input type="number" id="costoProducto" placeholder="Costo" step="0.01">
+        <input type="number" id="costoProducto" placeholder="Costo">
         <button onclick="agregar()">Agregar</button>
     </div>
 
@@ -183,10 +162,12 @@ ul li button {
 
     <div class="diferencia-section">
         <hr>
-        Diferencia: $<span id="diferenciaTotal">0.00</span>
+        Diferencia: $<span id="diferenciaTotal">0</span>
     </div>
 
-    <div class="total-general">Total General: $<span id="totalGeneral">0</span></div>
+    <div class="total-general">
+        Total General: $<span id="totalGeneral">0</span>
+    </div>
 
     <button class="reequilibrar-btn" onclick="reequilibrar()">Reequilibrar</button>
     <button class="borrar-todo-btn" onclick="borrarTodo()">Borrar Todos</button>
@@ -196,14 +177,20 @@ ul li button {
 let productos = JSON.parse(localStorage.getItem("productos")) || [];
 let dragIndex = null;
 
-function guardarDatos() { localStorage.setItem("productos", JSON.stringify(productos)); }
+function guardarDatos() {
+    localStorage.setItem("productos", JSON.stringify(productos));
+}
 
 function agregar() {
     const nombre = document.getElementById('nombreProducto').value.trim();
-    const costo = parseFloat(document.getElementById('costoProducto').value);
+    const costo = Math.round(parseFloat(document.getElementById('costoProducto').value));
+
     if(!nombre || isNaN(costo) || costo <= 0) return;
+
     productos.push({ nombre, costo, lista: null });
-    guardarDatos(); limpiarCampos(); distribuirProductos();
+    guardarDatos();
+    limpiarCampos();
+    distribuirProductos();
 }
 
 function limpiarCampos() {
@@ -213,13 +200,16 @@ function limpiarCampos() {
 }
 
 function eliminarProducto(index){
-    productos.splice(index,1); guardarDatos(); distribuirProductos();
+    productos.splice(index,1);
+    guardarDatos();
+    distribuirProductos();
 }
 
 function distribuirProductos(){
     const lista1 = document.getElementById('lista1');
     const lista2 = document.getElementById('lista2');
-    lista1.innerHTML = ''; lista2.innerHTML = '';
+    lista1.innerHTML = '';
+    lista2.innerHTML = '';
 
     let total1=0, total2=0;
 
@@ -227,34 +217,32 @@ function distribuirProductos(){
         const li = document.createElement("li");
         li.draggable = true;
         li.ondragstart = e=>iniciarArrastre(e,i);
-        li.innerHTML = `<span>${p.nombre}: $${p.costo.toFixed(2)}</span>`;
+        li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
 
         const btnDel = document.createElement("button");
-        btnDel.textContent="Eliminar"; btnDel.classList.add("delete-btn");
+        btnDel.textContent="Eliminar";
+        btnDel.classList.add("delete-btn");
         btnDel.onclick = e => { e.stopPropagation(); eliminarProducto(i); }
 
         li.appendChild(btnDel);
 
-        li.addEventListener('touchstart', e=>{
-            if(e.target.tagName!=='BUTTON'){
-                p.lista = (p.lista==='lista1') ? 'lista2' : 'lista1';
-                guardarDatos(); distribuirProductos();
-            }
-        });
-
         if(p.lista==='lista1'|| (p.lista===null && total1<=total2)){
-            p.lista='lista1'; lista1.appendChild(li); total1+=p.costo;
+            p.lista='lista1';
+            lista1.appendChild(li);
+            total1+=p.costo;
         }else{
-            p.lista='lista2'; lista2.appendChild(li); total2+=p.costo;
+            p.lista='lista2';
+            lista2.appendChild(li);
+            total2+=p.costo;
         }
     });
 
-    document.getElementById('totalLista1').textContent=total1.toFixed(2);
-    document.getElementById('totalLista2').textContent=total2.toFixed(2);
-    document.getElementById('totalGeneral').textContent=(total1+total2).toFixed(2);
+    document.getElementById('totalLista1').textContent=total1;
+    document.getElementById('totalLista2').textContent=total2;
+    document.getElementById('totalGeneral').textContent=total1+total2;
 
     const diferencia = Math.abs(total1 - total2);
-    document.getElementById('diferenciaTotal').textContent = diferencia.toFixed(2);
+    document.getElementById('diferenciaTotal').textContent = diferencia;
 
     guardarDatos();
 }
@@ -263,31 +251,37 @@ function iniciarArrastre(event,index){ dragIndex=index; }
 function permitirSoltar(event){ event.preventDefault(); }
 function soltar(event,listaDestino){
     event.preventDefault();
-    if(dragIndex!==null){ productos[dragIndex].lista=listaDestino; guardarDatos(); distribuirProductos(); dragIndex=null; }
+    if(dragIndex!==null){
+        productos[dragIndex].lista=listaDestino;
+        guardarDatos();
+        distribuirProductos();
+        dragIndex=null;
+    }
 }
 
 function reequilibrar(){
     productos.sort((a,b)=>b.costo-a.costo);
     let total1=0,total2=0;
     productos.forEach(p=>{
-        if(total1<=total2){ p.lista="lista1"; total1+=p.costo; }
-        else{ p.lista="lista2"; total2+=p.costo; }
+        if(total1<=total2){
+            p.lista="lista1";
+            total1+=p.costo;
+        } else {
+            p.lista="lista2";
+            total2+=p.costo;
+        }
     });
-    guardarDatos(); distribuirProductos();
+    guardarDatos();
+    distribuirProductos();
 }
 
 function borrarTodo(){
     if(confirm("¿Estás seguro que quieres borrar todos los productos?")){
-        productos=[]; guardarDatos(); distribuirProductos();
+        productos=[];
+        guardarDatos();
+        distribuirProductos();
     }
 }
-
-document.getElementById('nombreProducto').addEventListener('keydown', e=>{
-    if(e.key==='Enter'){ e.preventDefault(); document.getElementById('costoProducto').focus(); }
-});
-document.getElementById('costoProducto').addEventListener('keydown', e=>{
-    if(e.key==='Enter'){ e.preventDefault(); agregar(); }
-});
 
 distribuirProductos();
 </script>
