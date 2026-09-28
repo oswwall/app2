@@ -50,31 +50,6 @@ body {
 
 
 /* =========================================================
-   HEADER
-========================================================= */
-
-header {
-    text-align: center;
-
-    margin-bottom: 25px;
-}
-
-header h1 {
-    margin: 0;
-
-    font-size: 30px;
-
-    font-weight: 800;
-}
-
-header p {
-    margin: 7px 0 0;
-
-    color: #68737d;
-}
-
-
-/* =========================================================
    FORMULARIO
 ========================================================= */
 
@@ -213,7 +188,7 @@ header p {
 
 
 /* =========================================================
-   CABECERA LISTA
+   CABECERA DE CADA LISTA
 ========================================================= */
 
 .person-header {
@@ -408,7 +383,9 @@ header p {
 }
 
 
-/* REEQUILIBRAR */
+/* =========================================================
+   REEQUILIBRAR
+========================================================= */
 
 .balance-btn {
     background: #e9edf0;
@@ -424,7 +401,9 @@ header p {
 }
 
 
-/* BORRAR */
+/* =========================================================
+   BORRAR TODO
+========================================================= */
 
 .delete-all {
     background: white;
@@ -519,22 +498,7 @@ header p {
     }
 
 
-    header {
-        margin-bottom: 15px;
-    }
-
-    header h1 {
-        font-size: 24px;
-    }
-
-    header p {
-        font-size: 13px;
-    }
-
-
-    /* =========================================
-       FORMULARIO EN VERTICAL
-    ========================================= */
+    /* FORMULARIO VERTICAL */
 
     .add-box {
         padding: 12px;
@@ -553,10 +517,6 @@ header p {
     }
 
 
-    /*
-        Producto arriba
-    */
-
     #productName {
 
         width: 100%;
@@ -566,20 +526,12 @@ header p {
     }
 
 
-    /*
-        Precio debajo
-    */
-
     #productPrice {
 
         width: 100%;
 
     }
 
-
-    /*
-        Botón agregar debajo
-    */
 
     .add-btn {
 
@@ -588,9 +540,7 @@ header p {
     }
 
 
-    /* =========================================
-       DIFERENCIA
-    ========================================= */
+    /* DIFERENCIA */
 
     .summary {
 
@@ -603,9 +553,7 @@ header p {
     }
 
 
-    /* =========================================
-       DOS COLUMNAS
-    ========================================= */
+    /* DOS COLUMNAS */
 
     .lists {
 
@@ -617,9 +565,7 @@ header p {
     }
 
 
-    /* =========================================
-       LISTAS
-    ========================================= */
+    /* LISTAS */
 
     .person {
 
@@ -643,9 +589,7 @@ header p {
     }
 
 
-    /* =========================================
-       PRODUCTOS
-    ========================================= */
+    /* PRODUCTOS */
 
     .product-list {
 
@@ -679,9 +623,7 @@ header p {
     }
 
 
-    /* =========================================
-       BOTONES PRODUCTO
-    ========================================= */
+    /* BOTONES PRODUCTO */
 
     .product-actions {
 
@@ -702,9 +644,7 @@ header p {
     }
 
 
-    /* =========================================
-       TOTAL LISTA
-    ========================================= */
+    /* TOTAL */
 
     .list-total {
 
@@ -725,9 +665,7 @@ header p {
     }
 
 
-    /* =========================================
-       BOTONES FINALES
-    ========================================= */
+    /* BOTONES FINALES */
 
     .bottom-actions {
 
@@ -765,12 +703,6 @@ header p {
     .container {
 
         padding: 7px;
-
-    }
-
-    header h1 {
-
-        font-size: 22px;
 
     }
 
@@ -873,30 +805,12 @@ input {
 
 
 <!-- =====================================================
-     HEADER
-====================================================== -->
-
-<header>
-
-    <h1>
-        🛒 Divide la Cuenta
-    </h1>
-
-    <p>
-        Reparte las compras de la forma más equilibrada posible.
-    </p>
-
-</header>
-
-
-<!-- =====================================================
      AGREGAR PRODUCTO
 ====================================================== -->
 
 <div class="add-box">
 
     <div class="form-row">
-
 
         <!-- PRODUCTO -->
 
@@ -939,7 +853,6 @@ input {
         >
             + Agregar
         </button>
-
 
     </div>
 
@@ -994,8 +907,6 @@ input {
         ></div>
 
 
-        <!-- TOTAL LISTA 1 -->
-
         <div class="list-total">
 
             <span>
@@ -1035,8 +946,6 @@ input {
         ></div>
 
 
-        <!-- TOTAL LISTA 2 -->
-
         <div class="list-total">
 
             <span>
@@ -1064,7 +973,6 @@ input {
 
 <div class="bottom-actions">
 
-
     <button
         class="
             action-btn
@@ -1087,7 +995,6 @@ input {
     >
         🗑️ Borrar todo
     </button>
-
 
 </div>
 
@@ -1161,7 +1068,6 @@ function money(value) {
         "es-MX",
         {
             style: "currency",
-
             currency: "MXN",
 
             minimumFractionDigits: 0,
@@ -1230,7 +1136,6 @@ function saveData() {
 
     localStorage.setItem(
         "divideCuenta",
-
         JSON.stringify(
             products
         )
@@ -1267,8 +1172,6 @@ function addProduct() {
         );
 
 
-    /* Validar nombre */
-
     if (!name) {
 
         nameInput.focus();
@@ -1277,8 +1180,6 @@ function addProduct() {
 
     }
 
-
-    /* Validar precio */
 
     if (
         isNaN(price) ||
@@ -1291,8 +1192,6 @@ function addProduct() {
 
     }
 
-
-    /* Crear producto */
 
     products.push({
 
@@ -1307,10 +1206,6 @@ function addProduct() {
     });
 
 
-    /*
-        Limpiar campos.
-    */
-
     nameInput.value = "";
 
     priceInput.value = "";
@@ -1318,15 +1213,14 @@ function addProduct() {
 
     /*
         Reequilibrar automáticamente
-        cada vez que se agrega
-        un producto.
+        al agregar cada producto.
     */
 
     balanceProducts(false);
 
 
     /*
-        Volver al campo Producto.
+        Volver al campo de producto.
     */
 
     nameInput.focus();
@@ -1421,8 +1315,7 @@ function balanceProducts(
 
 
     /*
-        Convertimos a centavos
-        para trabajar con precisión.
+        Trabajamos en centavos.
     */
 
     const items =
@@ -1447,10 +1340,8 @@ function balanceProducts(
 
 
     /*
-        Programación dinámica.
-
-        Busca la combinación
-        más cercana a la mitad.
+        Programación dinámica para encontrar
+        la combinación más cercana a la mitad.
     */
 
     const dp =
@@ -1509,11 +1400,6 @@ function balanceProducts(
     }
 
 
-    /*
-        Encontrar la suma
-        más cercana a la mitad.
-    */
-
     let bestSum = 0;
 
 
@@ -1543,20 +1429,11 @@ function balanceProducts(
     }
 
 
-    /*
-        Productos de Lista 1.
-    */
-
     const selectedIds =
         new Set(
             dp.get(bestSum)
         );
 
-
-    /*
-        Productos restantes
-        van a Lista 2.
-    */
 
     products.forEach(
         product => {
@@ -1663,10 +1540,6 @@ function render() {
     let total2 = 0;
 
 
-    /*
-        Calcular totales.
-    */
-
     products.forEach(
         product => {
 
@@ -1690,10 +1563,6 @@ function render() {
     );
 
 
-    /*
-        Lista 1.
-    */
-
     products
         .filter(
             product =>
@@ -1712,10 +1581,6 @@ function render() {
         );
 
 
-    /*
-        Lista 2.
-    */
-
     products
         .filter(
             product =>
@@ -1733,10 +1598,6 @@ function render() {
             }
         );
 
-
-    /*
-        Mostrar "Sin productos".
-    */
 
     if (
 
@@ -1772,19 +1633,11 @@ function render() {
     }
 
 
-    /*
-        Diferencia.
-    */
-
     const difference =
         Math.abs(
             total1 - total2
         );
 
-
-    /*
-        Actualizar totales.
-    */
 
     document.getElementById(
         "total1"
@@ -1807,7 +1660,7 @@ function render() {
 
 
 /* =========================================================
-   CREAR PRODUCTO
+   CREAR ELEMENTO DE PRODUCTO
 ========================================================= */
 
 function createProductElement(
@@ -1852,7 +1705,8 @@ function createProductElement(
             <button
                 class="small-btn"
                 type="button"
-                title="Mover"
+                title="Mover a la otra lista"
+
                 onclick="
                     moveProduct(
                         ${product.id}
@@ -1869,7 +1723,8 @@ function createProductElement(
                     delete-btn
                 "
                 type="button"
-                title="Eliminar"
+                title="Eliminar producto"
+
                 onclick="
                     deleteProduct(
                         ${product.id}
@@ -1912,7 +1767,7 @@ function escapeHTML(text) {
 
 /* =========================================================
    ENTER EN PRODUCTO
-   → PASAR A PRECIO
+   → PRECIO
 ========================================================= */
 
 document
@@ -1930,13 +1785,11 @@ document
                 event.preventDefault();
 
 
-                const priceInput =
-                    document.getElementById(
+                document
+                    .getElementById(
                         "productPrice"
-                    );
-
-
-                priceInput.focus();
+                    )
+                    .focus();
 
             }
 
@@ -1947,7 +1800,7 @@ document
 /* =========================================================
    ENTER EN PRECIO
    → AGREGAR
-   → VOLVER A PRODUCTO
+   → PRODUCTO
 ========================================================= */
 
 document
@@ -1973,7 +1826,7 @@ document
 
 
 /* =========================================================
-   INICIAR
+   INICIAR APP
 ========================================================= */
 
 loadData();
@@ -1981,5 +1834,5 @@ loadData();
 </script>
 
 </body>
-</html>
 
+</html>
