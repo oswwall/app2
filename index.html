@@ -1,293 +1,1751 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>App de Distribución de Costos</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>Divide la Cuenta</title>
+
+
 <style>
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #e0e7ff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
-.container {
-    width: 95%;
-    max-width: 900px;
-    margin: 15px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
 
-/* 🔥 CAMBIO AQUÍ */
-.input-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
+/* =========================================================
+   GENERAL
+========================================================= */
 
-.input-section input {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
-    width: 100%;
+* {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.input-section button {
-    padding: 12px;
-    background-color: #6366f1;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+body {
+    margin: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background: #f4f6f8;
+    color: #1d252c;
+}
+
+.container {
     width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
 }
 
-.input-section button:hover {
-    background-color: #4f46e5;
-}
-/* 🔥 FIN CAMBIO */
 
-.list-section {
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #68737d;
+}
+
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+.add-box {
+    background: white;
+    padding: 18px;
+    border-radius: 16px;
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.06);
+
+    margin-bottom: 15px;
+}
+
+.form-row {
     display: flex;
-    gap: 12px;
-    justify-content: space-between;
+    gap: 10px;
 }
-.list {
-    flex: 0 0 45%;
-    background: #f3f4f6;
+
+.form-row input {
+    border: 1px solid #d7dce1;
     border-radius: 10px;
-    padding: 6px;
-    min-height: 180px;
-}
-ul { list-style: none; padding: 0; }
-
-ul li {
-    padding: 7px;
-    border: 1px solid #d1d5db;
-    margin-bottom: 6px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: grab;
-}
-.delete-btn {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-.total-section {
-    margin-top: 6px;
-    border-top: 1px solid #d1d5db;
-    padding-top: 4px;
-    text-align: right;
-    font-weight: bold;
-    color: #4f46e5;
-}
-.total-general {
-    text-align: center;
-    margin-top: 12px;
-    font-weight: bold;
-    font-size: 17px;
-    color: #10b981;
-}
-.diferencia-section{
-    margin-top: 15px;
-    text-align: center;
-    font-weight: bold;
+    padding: 13px;
     font-size: 16px;
-    color: #ef4444;
+    outline: none;
+    background: white;
 }
-.diferencia-section hr{
-    margin-bottom: 8px;
-    border: none;
-    border-top: 1px solid #d1d5db;
+
+.form-row input:focus {
+    border-color: #1677ff;
 }
-.reequilibrar-btn, .borrar-todo-btn {
-    margin-top: 10px;
-    padding: 10px 18px;
-    background-color: #3b82f6;
-    color: white;
+
+#productName {
+    flex: 1;
+}
+
+#productPrice {
+    width: 150px;
+}
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+button {
     border: none;
-    border-radius: 8px;
     cursor: pointer;
-    margin-right: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 12px 16px;
 }
+
+.add-btn {
+    background: #1677ff;
+    color: white;
+}
+
+.add-btn:hover {
+    background: #0868e7;
+}
+
+
+/* =========================================================
+   DIFERENCIA
+========================================================= */
+
+.summary {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 6px;
+
+    margin:
+        0 3px
+        0 12px;
+
+    font-size: 13px;
+    color: #8a939b;
+}
+
+.summary-title {
+    font-weight: 500;
+}
+
+.summary-difference {
+    font-weight: 700;
+    color: #69747e;
+}
+
+.summary-difference strong {
+    color: #69747e;
+}
+
+
+/* =========================================================
+   LISTAS
+========================================================= */
+
+.lists {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+.person {
+    background: white;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.06);
+}
+
+
+/* =========================================================
+   CABECERA PERSONA
+========================================================= */
+
+.person-header {
+    padding: 18px;
+
+    background: #f7f8fa;
+
+    border-bottom:
+        1px solid #e8ebee;
+}
+
+.person-header h2 {
+    margin: 0;
+
+    font-size: 19px;
+}
+
+.person-total {
+    margin-top: 7px;
+
+    font-size: 26px;
+
+    font-weight: 800;
+
+    color: #1677ff;
+}
+
+
+/* =========================================================
+   LISTA PRODUCTOS
+========================================================= */
+
+.product-list {
+    padding: 10px;
+
+    min-height: 100px;
+}
+
+.product {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 12px 8px;
+
+    border-bottom:
+        1px solid #edf0f2;
+}
+
+.product:last-child {
+    border-bottom: none;
+}
+
+.product-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.product-name {
+    font-size: 15px;
+
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+.product-price {
+    font-size: 14px;
+
+    color: #69747e;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   BOTONES PRODUCTO
+========================================================= */
+
+.product-actions {
+    display: flex;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+}
+
+.small-btn {
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+
+    border-radius: 8px;
+
+    background: #f0f2f4;
+
+    color: #333;
+}
+
+.small-btn:hover {
+    background: #e3e6e9;
+}
+
+.delete-btn {
+    color: #d92828;
+}
+
+
+/* =========================================================
+   LISTA VACÍA
+========================================================= */
+
+.empty {
+    text-align: center;
+
+    color: #9aa2a9;
+
+    padding:
+        25px 10px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ACCIONES FINALES
+========================================================= */
+
+.bottom-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.action-btn {
+    flex: 1;
+
+    background: white;
+
+    border:
+        1px solid #dce1e5;
+
+    color: #26313a;
+}
+
+.balance-btn {
+    background: #202830;
+
+    color: white;
+}
+
+.delete-all {
+    background: white;
+
+    border:
+        1px solid #ffb7b7;
+
+    color: #d92828;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-background {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    z-index: 100;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal {
+    background: white;
+
+    width: 100%;
+
+    max-width: 400px;
+
+    border-radius: 18px;
+
+    padding: 25px;
+}
+
+.modal h3 {
+    margin-top: 0;
+}
+
+.modal-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    flex: 1;
+}
+
+.cancel {
+    background: #edf0f2;
+}
+
+.confirm {
+    background: #d92828;
+
+    color: white;
+}
+
+
+/* =========================================================
+   RESPONSIVE CELULAR
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .container {
+        padding: 10px;
+    }
+
+
+    /* HEADER */
+
+    header {
+        margin-bottom: 15px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    header p {
+        font-size: 13px;
+    }
+
+
+    /* FORMULARIO */
+
+    .add-box {
+        padding: 12px;
+
+        border-radius: 13px;
+    }
+
+    .form-row {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr 100px;
+
+        gap: 8px;
+    }
+
+    #productPrice {
+        width: 100%;
+    }
+
+    .add-btn {
+        grid-column:
+            1 / -1;
+    }
+
+
+    /* DIFERENCIA */
+
+    .summary {
+
+        font-size: 12px;
+
+        margin:
+            0 3px
+            0 8px;
+    }
+
+
+    /* DOS COLUMNAS SIEMPRE */
+
+    .lists {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 8px;
+    }
+
+
+    /* PERSONAS */
+
+    .person {
+
+        border-radius: 12px;
+    }
+
+    .person-header {
+
+        padding:
+            12px 8px;
+    }
+
+    .person-header h2 {
+
+        font-size: 14px;
+
+        white-space: nowrap;
+    }
+
+    .person-total {
+
+        font-size: 20px;
+
+        margin-top: 5px;
+    }
+
+
+    /* PRODUCTOS */
+
+    .product-list {
+
+        padding: 6px;
+    }
+
+    .product {
+
+        padding:
+            9px 3px;
+
+        gap: 4px;
+    }
+
+    .product-name {
+
+        font-size: 13px;
+
+        line-height: 1.2;
+    }
+
+    .product-price {
+
+        font-size: 12px;
+
+        margin-top: 2px;
+    }
+
+
+    /* BOTONES PRODUCTO */
+
+    .product-actions {
+
+        gap: 3px;
+    }
+
+    .small-btn {
+
+        width: 27px;
+        height: 27px;
+
+        font-size: 13px;
+
+        border-radius: 6px;
+    }
+
+
+    /* BOTONES FINALES */
+
+    .bottom-actions {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 8px;
+
+        margin-top: 12px;
+    }
+
+    .action-btn {
+
+        min-width: 0;
+
+        padding:
+            11px 5px;
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES MUY PEQUEÑOS
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .container {
+        padding: 7px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .lists {
+        gap: 5px;
+    }
+
+    .person-header {
+        padding:
+            10px 6px;
+    }
+
+    .person-header h2 {
+        font-size: 12px;
+    }
+
+    .person-total {
+        font-size: 18px;
+    }
+
+    .product-list {
+        padding: 4px;
+    }
+
+    .product {
+        padding:
+            8px 2px;
+    }
+
+    .product-name {
+        font-size: 12px;
+    }
+
+    .product-price {
+        font-size: 11px;
+    }
+
+    .small-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   EVITAR ZOOM EN INPUTS IOS
+========================================================= */
+
+@media (max-width: 700px) {
+
+    input,
+    button {
+        font-size: 16px;
+    }
+
+    .small-btn,
+    .action-btn {
+        font-size: 13px;
+    }
+
+}
+
 </style>
+
 </head>
+
+
 <body>
 
+
 <div class="container">
-    <div class="input-section">
-        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-        <input type="number" id="costoProducto" placeholder="Costo">
-        <button onclick="agregar()">Agregar</button>
-    </div>
 
-    <div class="list-section">
-        <div class="list" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista1')">
-            <h2>Lista 1</h2>
-            <ul id="lista1"></ul>
-            <div class="total-section">Total: $<span id="totalLista1">0</span></div>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header>
+
+        <h1>
+            🛒 Divide la Cuenta
+        </h1>
+
+        <p>
+            Reparte las compras de la forma más equilibrada posible.
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         AGREGAR PRODUCTO
+    ====================================================== -->
+
+    <div class="add-box">
+
+        <div class="form-row">
+
+
+            <input
+                type="text"
+                id="productName"
+                placeholder="Nombre del producto"
+                autocomplete="off"
+            >
+
+
+            <input
+                type="number"
+                id="productPrice"
+                placeholder="$ Precio"
+                min="0"
+                step="0.01"
+                inputmode="decimal"
+            >
+
+
+            <button
+                class="add-btn"
+                onclick="addProduct()"
+            >
+                + Agregar
+            </button>
+
+
         </div>
-        <div class="list" ondragover="permitirSoltar(event)" ondrop="soltar(event,'lista2')">
-            <h2>Lista 2</h2>
-            <ul id="lista2"></ul>
-            <div class="total-section">Total: $<span id="totalLista2">0</span></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DIFERENCIA
+    ====================================================== -->
+
+    <div class="summary">
+
+        <span class="summary-title">
+            Diferencia:
+        </span>
+
+        <span
+            class="summary-difference"
+            id="difference"
+        >
+            $0
+        </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         LISTAS
+    ====================================================== -->
+
+    <div class="lists">
+
+
+        <!-- PERSONA 1 -->
+
+        <div class="person">
+
+
+            <div class="person-header">
+
+                <h2>
+                    👤 Persona 1
+                </h2>
+
+                <div
+                    class="person-total"
+                    id="total1"
+                >
+                    $0
+                </div>
+
+            </div>
+
+
+            <div
+                class="product-list"
+                id="list1"
+            ></div>
+
+
         </div>
+
+
+        <!-- PERSONA 2 -->
+
+        <div class="person">
+
+
+            <div class="person-header">
+
+                <h2>
+                    👤 Persona 2
+                </h2>
+
+                <div
+                    class="person-total"
+                    id="total2"
+                >
+                    $0
+                </div>
+
+            </div>
+
+
+            <div
+                class="product-list"
+                id="list2"
+            ></div>
+
+
+        </div>
+
+
     </div>
 
-    <div class="diferencia-section">
-        <hr>
-        Diferencia: $<span id="diferenciaTotal">0</span>
+
+    <!-- =====================================================
+         ACCIONES AL FINAL
+    ====================================================== -->
+
+    <div class="bottom-actions">
+
+
+        <button
+            class="action-btn balance-btn"
+            onclick="balanceProducts()"
+        >
+            ⚖️ Reequilibrar
+        </button>
+
+
+        <button
+            class="action-btn delete-all"
+            onclick="openDeleteModal()"
+        >
+            🗑️ Borrar todo
+        </button>
+
+
     </div>
 
-    <div class="total-general">
-        Total General: $<span id="totalGeneral">0</span>
-    </div>
 
-    <button class="reequilibrar-btn" onclick="reequilibrar()">Reequilibrar</button>
-    <button class="borrar-todo-btn" onclick="borrarTodo()">Borrar Todos</button>
 </div>
 
+
+<!-- =========================================================
+     MODAL BORRAR
+========================================================= -->
+
+<div
+    class="modal-background"
+    id="deleteModal"
+>
+
+
+    <div class="modal">
+
+
+        <h3>
+            ¿Borrar todos los productos?
+        </h3>
+
+
+        <p>
+            Se eliminarán todos los productos y se
+            reiniciará la distribución.
+        </p>
+
+
+        <div class="modal-buttons">
+
+
+            <button
+                class="cancel"
+                onclick="closeDeleteModal()"
+            >
+                Cancelar
+            </button>
+
+
+            <button
+                class="confirm"
+                onclick="deleteAll()"
+            >
+                Sí, borrar
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
 <script>
-let productos = JSON.parse(localStorage.getItem("productos")) || [];
-let dragIndex = null;
 
-function guardarDatos(){
-    localStorage.setItem("productos", JSON.stringify(productos));
+/* =========================================================
+   DATOS
+========================================================= */
+
+let products = [];
+
+let nextId = 1;
+
+
+/* =========================================================
+   FORMATO DE MONEDA
+========================================================= */
+
+function money(value) {
+
+    return new Intl.NumberFormat(
+        "es-MX",
+        {
+            style: "currency",
+            currency: "MXN",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        }
+    ).format(value);
+
 }
 
-function agregar(){
-    const nombreInput = document.getElementById('nombreProducto');
-    const costoInput = document.getElementById('costoProducto');
 
-    const nombre = nombreInput.value.trim();
-    const costo = Math.round(parseFloat(costoInput.value));
+/* =========================================================
+   CARGAR DATOS
+========================================================= */
 
-    if(!nombre || isNaN(costo) || costo <= 0) return;
+function loadData() {
 
-    productos.push({ nombre, costo, lista: null });
+    const saved =
+        localStorage.getItem(
+            "divideCuenta"
+        );
 
-    nombreInput.value = "";
-    costoInput.value = "";
-    nombreInput.focus();
 
-    guardarDatos();
-    distribuirProductos();
+    if (saved) {
+
+        try {
+
+            products =
+                JSON.parse(saved);
+
+
+            if (products.length > 0) {
+
+                nextId =
+                    Math.max(
+                        ...products.map(
+                            p => p.id
+                        )
+                    ) + 1;
+
+            }
+
+        }
+
+        catch (error) {
+
+            products = [];
+
+        }
+
+    }
+
+
+    render();
+
 }
 
-function eliminarProducto(index){
-    productos.splice(index,1);
-    guardarDatos();
-    distribuirProductos();
+
+/* =========================================================
+   GUARDAR DATOS
+========================================================= */
+
+function saveData() {
+
+    localStorage.setItem(
+        "divideCuenta",
+        JSON.stringify(products)
+    );
+
 }
 
-function distribuirProductos(){
-    const lista1 = document.getElementById('lista1');
-    const lista2 = document.getElementById('lista2');
-    lista1.innerHTML = "";
-    lista2.innerHTML = "";
+
+/* =========================================================
+   AGREGAR PRODUCTO
+========================================================= */
+
+function addProduct() {
+
+    const nameInput =
+        document.getElementById(
+            "productName"
+        );
+
+
+    const priceInput =
+        document.getElementById(
+            "productPrice"
+        );
+
+
+    const name =
+        nameInput.value.trim();
+
+
+    const price =
+        parseFloat(
+            priceInput.value
+        );
+
+
+    if (!name) {
+
+        nameInput.focus();
+
+        return;
+
+    }
+
+
+    if (
+        isNaN(price) ||
+        price <= 0
+    ) {
+
+        priceInput.focus();
+
+        return;
+
+    }
+
+
+    /*
+        Crear producto.
+    */
+
+    products.push({
+
+        id: nextId++,
+
+        name: name,
+
+        price: price,
+
+        person: 1
+
+    });
+
+
+    /*
+        Limpiar campos.
+    */
+
+    nameInput.value = "";
+
+    priceInput.value = "";
+
+
+    /*
+        Reequilibrar automáticamente.
+    */
+
+    balanceProducts(false);
+
+
+    /*
+        Preparar siguiente producto.
+    */
+
+    nameInput.focus();
+
+}
+
+
+/* =========================================================
+   ELIMINAR PRODUCTO
+========================================================= */
+
+function deleteProduct(id) {
+
+    products =
+        products.filter(
+            product =>
+                product.id !== id
+        );
+
+
+    saveData();
+
+    render();
+
+}
+
+
+/* =========================================================
+   MOVER PRODUCTO
+========================================================= */
+
+function moveProduct(id) {
+
+    const product =
+        products.find(
+            p => p.id === id
+        );
+
+
+    if (!product) return;
+
+
+    product.person =
+        product.person === 1
+            ? 2
+            : 1;
+
+
+    saveData();
+
+    render();
+
+}
+
+
+/* =========================================================
+   REEQUILIBRAR
+========================================================= */
+
+function balanceProducts(
+    showAlert = true
+) {
+
+    if (
+        products.length === 0
+    ) {
+
+        if (showAlert) {
+
+            alert(
+                "Primero agrega algunos productos."
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    /*
+        Total de productos.
+    */
+
+    const total =
+        products.reduce(
+            (sum, product) =>
+                sum + product.price,
+            0
+        );
+
+
+    /*
+        Queremos acercarnos a la mitad.
+    */
+
+    const target =
+        total / 2;
+
+
+    /*
+        Convertimos precios a centavos.
+    */
+
+    const items =
+        products.map(
+            product => ({
+
+                ...product,
+
+                cents:
+                    Math.round(
+                        product.price * 100
+                    )
+
+            })
+        );
+
+
+    const targetCents =
+        Math.round(
+            target * 100
+        );
+
+
+    /*
+        Programación dinámica.
+
+        Busca una combinación de productos
+        cuya suma se acerque lo máximo
+        posible a la mitad.
+    */
+
+    const dp =
+        new Map();
+
+
+    dp.set(
+        0,
+        []
+    );
+
+
+    for (
+        const item
+        of items
+    ) {
+
+        const existing =
+            Array.from(
+                dp.entries()
+            );
+
+
+        for (
+            const [
+                sum,
+                combination
+            ]
+            of existing
+        ) {
+
+            const newSum =
+                sum + item.cents;
+
+
+            if (
+                newSum <= targetCents &&
+                !dp.has(newSum)
+            ) {
+
+                dp.set(
+
+                    newSum,
+
+                    [
+                        ...combination,
+                        item.id
+                    ]
+
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /*
+        Buscar mejor combinación.
+    */
+
+    let bestSum = 0;
+
+
+    for (
+        const sum
+        of dp.keys()
+    ) {
+
+        if (
+
+            Math.abs(
+                targetCents - sum
+            )
+
+            <
+
+            Math.abs(
+                targetCents - bestSum
+            )
+
+        ) {
+
+            bestSum = sum;
+
+        }
+
+    }
+
+
+    /*
+        Productos que irán
+        a Persona 1.
+    */
+
+    const selectedIds =
+        new Set(
+            dp.get(bestSum)
+        );
+
+
+    /*
+        Todo lo demás va
+        a Persona 2.
+    */
+
+    products.forEach(
+        product => {
+
+            product.person =
+                selectedIds.has(
+                    product.id
+                )
+                    ? 1
+                    : 2;
+
+        }
+    );
+
+
+    saveData();
+
+    render();
+
+}
+
+
+/* =========================================================
+   MODAL BORRAR
+========================================================= */
+
+function openDeleteModal() {
+
+    if (
+        products.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "deleteModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+function closeDeleteModal() {
+
+    document.getElementById(
+        "deleteModal"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   BORRAR TODO
+========================================================= */
+
+function deleteAll() {
+
+    products = [];
+
+    nextId = 1;
+
+
+    localStorage.removeItem(
+        "divideCuenta"
+    );
+
+
+    closeDeleteModal();
+
+    render();
+
+}
+
+
+/* =========================================================
+   RENDERIZAR
+========================================================= */
+
+function render() {
+
+    const list1 =
+        document.getElementById(
+            "list1"
+        );
+
+
+    const list2 =
+        document.getElementById(
+            "list2"
+        );
+
+
+    list1.innerHTML = "";
+
+    list2.innerHTML = "";
+
 
     let total1 = 0;
+
     let total2 = 0;
 
-    productos.forEach((p,i)=>{
-        const li = document.createElement("li");
-        li.draggable = true;
-        li.ondragstart = e=> dragIndex=i;
 
-        li.innerHTML = `<span>${p.nombre}: $${p.costo}</span>`;
+    /*
+        Calcular totales.
+    */
 
-        const btn = document.createElement("button");
-        btn.textContent="Eliminar";
-        btn.className="delete-btn";
-        btn.onclick=()=> eliminarProducto(i);
+    products.forEach(
+        product => {
 
-        li.appendChild(btn);
+            if (
+                product.person === 1
+            ) {
 
-        if(p.lista==='lista1' || (p.lista===null && total1<=total2)){
-            p.lista='lista1';
-            total1+=p.costo;
-            lista1.appendChild(li);
-        } else {
-            p.lista='lista2';
-            total2+=p.costo;
-            lista2.appendChild(li);
+                total1 +=
+                    product.price;
+
+            }
+
+            else {
+
+                total2 +=
+                    product.price;
+
+            }
+
         }
-    });
+    );
 
-    document.getElementById('totalLista1').textContent=total1;
-    document.getElementById('totalLista2').textContent=total2;
-    document.getElementById('totalGeneral').textContent=total1+total2;
-    document.getElementById('diferenciaTotal').textContent=Math.abs(total1-total2);
 
-    guardarDatos();
-}
+    /*
+        Renderizar Persona 1.
+    */
 
-function permitirSoltar(e){ e.preventDefault(); }
-function soltar(e,listaDestino){
-    e.preventDefault();
-    if(dragIndex!==null){
-        productos[dragIndex].lista=listaDestino;
-        distribuirProductos();
-        dragIndex=null;
+    products
+        .filter(
+            product =>
+                product.person === 1
+        )
+        .forEach(
+            product => {
+
+                list1.appendChild(
+                    createProductElement(
+                        product
+                    )
+                );
+
+            }
+        );
+
+
+    /*
+        Renderizar Persona 2.
+    */
+
+    products
+        .filter(
+            product =>
+                product.person === 2
+        )
+        .forEach(
+            product => {
+
+                list2.appendChild(
+                    createProductElement(
+                        product
+                    )
+                );
+
+            }
+        );
+
+
+    /*
+        Lista vacía Persona 1.
+    */
+
+    if (
+
+        products.filter(
+            p => p.person === 1
+        ).length === 0
+
+    ) {
+
+        list1.innerHTML = `
+            <div class="empty">
+                Sin productos
+            </div>
+        `;
+
     }
+
+
+    /*
+        Lista vacía Persona 2.
+    */
+
+    if (
+
+        products.filter(
+            p => p.person === 2
+        ).length === 0
+
+    ) {
+
+        list2.innerHTML = `
+            <div class="empty">
+                Sin productos
+            </div>
+        `;
+
+    }
+
+
+    /*
+        Diferencia.
+    */
+
+    const difference =
+        Math.abs(
+            total1 - total2
+        );
+
+
+    /*
+        Actualizar interfaz.
+    */
+
+    document.getElementById(
+        "total1"
+    ).textContent =
+        money(total1);
+
+
+    document.getElementById(
+        "total2"
+    ).textContent =
+        money(total2);
+
+
+    document.getElementById(
+        "difference"
+    ).textContent =
+        money(difference);
+
 }
 
-function reequilibrar(){
-    productos.sort((a,b)=>b.costo-a.costo);
-    let total1=0,total2=0;
-    productos.forEach(p=>{
-        if(total1<=total2){
-            p.lista="lista1";
-            total1+=p.costo;
-        } else {
-            p.lista="lista2";
-            total2+=p.costo;
+
+/* =========================================================
+   CREAR PRODUCTO
+========================================================= */
+
+function createProductElement(
+    product
+) {
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+
+    element.className =
+        "product";
+
+
+    element.innerHTML = `
+
+        <div class="product-info">
+
+            <div class="product-name">
+                ${escapeHTML(
+                    product.name
+                )}
+            </div>
+
+            <div class="product-price">
+                ${money(
+                    product.price
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="product-actions">
+
+            <button
+                class="small-btn"
+                title="Mover"
+                onclick="
+                    moveProduct(
+                        ${product.id}
+                    )
+                "
+            >
+                ↔
+            </button>
+
+
+            <button
+                class="
+                    small-btn
+                    delete-btn
+                "
+                title="Eliminar"
+                onclick="
+                    deleteProduct(
+                        ${product.id}
+                    )
+                "
+            >
+                ×
+            </button>
+
+        </div>
+
+    `;
+
+
+    return element;
+
+}
+
+
+/* =========================================================
+   PROTEGER TEXTO
+========================================================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent = text;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   ENTER EN NOMBRE
+   → PASAR A PRECIO
+========================================================= */
+
+document
+    .getElementById(
+        "productName"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+
+                document
+                    .getElementById(
+                        "productPrice"
+                    )
+                    .focus();
+
+            }
+
         }
-    });
-    distribuirProductos();
-}
+    );
 
-function borrarTodo(){
-    if(confirm("¿Borrar todo?")){
-        productos=[];
-        guardarDatos();
-        distribuirProductos();
-    }
-}
 
-document.getElementById('nombreProducto').addEventListener('keydown', function(e){
-    if(e.key === "Enter"){
-        e.preventDefault();
-        document.getElementById('costoProducto').focus();
-    }
-});
+/* =========================================================
+   ENTER EN PRECIO
+   → AGREGAR
+========================================================= */
 
-document.getElementById('costoProducto').addEventListener('keydown', function(e){
-    if(e.key === "Enter"){
-        e.preventDefault();
-        agregar();
-    }
-});
+document
+    .getElementById(
+        "productPrice"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-distribuirProductos();
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+
+                addProduct();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+loadData();
+
 </script>
 
 </body>
 </html>
+
