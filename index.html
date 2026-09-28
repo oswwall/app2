@@ -130,7 +130,7 @@ body {
 
 
 /* =========================================================
-   DIFERENCIA
+   TOTAL Y DIFERENCIA
 ========================================================= */
 
 .summary {
@@ -140,25 +140,48 @@ body {
 
     justify-content: flex-end;
 
-    gap: 6px;
+    gap: 18px;
 
     margin:
-        0 3px
+        8px 3px
         12px;
 
-    font-size: 13px;
-
     color: #8a939b;
+
+    font-size: 12px;
+}
+
+.summary-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
 }
 
 .summary-title {
     font-weight: 500;
 }
 
-.summary-difference {
-    font-weight: 700;
+#grandTotal {
+    font-weight: 600;
 
     color: #69747e;
+}
+
+.difference-item {
+    padding-left: 12px;
+
+    border-left:
+        1px solid #dfe3e6;
+}
+
+.summary-difference {
+    font-size: 14px;
+
+    font-weight: 800;
+
+    color: #4f5961;
 }
 
 
@@ -540,15 +563,31 @@ body {
     }
 
 
-    /* DIFERENCIA */
+    /* TOTAL / DIFERENCIA */
 
     .summary {
 
-        font-size: 12px;
+        justify-content: flex-end;
+
+        gap: 12px;
+
+        font-size: 11px;
 
         margin:
-            0 3px
+            6px 3px
             8px;
+
+    }
+
+    .difference-item {
+
+        padding-left: 9px;
+
+    }
+
+    .summary-difference {
+
+        font-size: 13px;
 
     }
 
@@ -644,7 +683,7 @@ body {
     }
 
 
-    /* TOTAL */
+    /* TOTAL LISTA */
 
     .list-total {
 
@@ -860,26 +899,6 @@ input {
 
 
 <!-- =====================================================
-     DIFERENCIA
-====================================================== -->
-
-<div class="summary">
-
-    <span class="summary-title">
-        Diferencia:
-    </span>
-
-    <span
-        class="summary-difference"
-        id="difference"
-    >
-        $0
-    </span>
-
-</div>
-
-
-<!-- =====================================================
      LISTAS
 ====================================================== -->
 
@@ -963,6 +982,43 @@ input {
 
     </div>
 
+
+</div>
+
+
+<!-- =====================================================
+     TOTAL GENERAL / DIFERENCIA
+====================================================== -->
+
+<div class="summary">
+
+    <div class="summary-item">
+
+        <span class="summary-title">
+            Total:
+        </span>
+
+        <span id="grandTotal">
+            $0
+        </span>
+
+    </div>
+
+
+    <div class="summary-item difference-item">
+
+        <span class="summary-title">
+            Diferencia:
+        </span>
+
+        <span
+            class="summary-difference"
+            id="difference"
+        >
+            $0
+        </span>
+
+    </div>
 
 </div>
 
@@ -1068,6 +1124,7 @@ function money(value) {
         "es-MX",
         {
             style: "currency",
+
             currency: "MXN",
 
             minimumFractionDigits: 0,
@@ -1136,6 +1193,7 @@ function saveData() {
 
     localStorage.setItem(
         "divideCuenta",
+
         JSON.stringify(
             products
         )
@@ -1220,7 +1278,7 @@ function addProduct() {
 
 
     /*
-        Volver al campo de producto.
+        Volver al campo Producto.
     */
 
     nameInput.focus();
@@ -1633,11 +1691,27 @@ function render() {
     }
 
 
+    /* =========================================
+       TOTAL GENERAL
+    ========================================= */
+
+    const grandTotal =
+        total1 + total2;
+
+
+    /* =========================================
+       DIFERENCIA
+    ========================================= */
+
     const difference =
         Math.abs(
             total1 - total2
         );
 
+
+    /* =========================================
+       ACTUALIZAR TOTALES
+    ========================================= */
 
     document.getElementById(
         "total1"
@@ -1649,6 +1723,12 @@ function render() {
         "total2"
     ).textContent =
         money(total2);
+
+
+    document.getElementById(
+        "grandTotal"
+    ).textContent =
+        money(grandTotal);
 
 
     document.getElementById(
