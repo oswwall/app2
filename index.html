@@ -77,7 +77,7 @@ header p {
 
 
 /* =========================================================
-   AGREGAR PRODUCTO
+   FORMULARIO
 ========================================================= */
 
 .add-box {
@@ -231,7 +231,7 @@ button {
 
 
 /* =========================================================
-   CABECERA PERSONA
+   CABECERA LISTA
 ========================================================= */
 
 .person-header {
@@ -362,7 +362,7 @@ button {
 
 
 /* =========================================================
-   VACÍO
+   LISTA VACÍA
 ========================================================= */
 
 .empty {
@@ -379,7 +379,7 @@ button {
 
 
 /* =========================================================
-   ACCIONES
+   BOTONES FINALES
 ========================================================= */
 
 .bottom-actions {
@@ -404,7 +404,7 @@ button {
 }
 
 
-/* REEQUILIBRAR - COLOR MÁS SUAVE */
+/* REEQUILIBRAR — COLOR SUAVE */
 
 .balance-btn {
 
@@ -421,6 +421,8 @@ button {
     background: #dde2e6;
 }
 
+
+/* BORRAR */
 
 .delete-all {
 
@@ -503,7 +505,7 @@ button {
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE CELULAR
 ========================================================= */
 
 @media (max-width: 700px) {
@@ -513,6 +515,8 @@ button {
         padding: 10px;
     }
 
+
+    /* HEADER */
 
     header {
 
@@ -584,7 +588,7 @@ button {
     }
 
 
-    /* PERSONAS */
+    /* LISTAS */
 
     .person {
 
@@ -642,7 +646,7 @@ button {
     }
 
 
-    /* BOTONES */
+    /* BOTONES PRODUCTO */
 
     .product-actions {
 
@@ -661,7 +665,7 @@ button {
     }
 
 
-    /* ACCIONES */
+    /* BOTONES FINALES */
 
     .bottom-actions {
 
@@ -689,7 +693,7 @@ button {
 
 
 /* =========================================================
-   CELULARES PEQUEÑOS
+   CELULARES MUY PEQUEÑOS
 ========================================================= */
 
 @media (max-width: 380px) {
@@ -759,22 +763,26 @@ button {
 
 
 /* =========================================================
-   TAMAÑO INPUTS EN IOS
+   INPUTS
 ========================================================= */
 
-@media (max-width: 700px) {
+/*
+    IMPORTANTE:
 
-    input {
+    NO usamos inputmode en Precio.
 
-        font-size: 16px;
-    }
+    Esto permite que iOS/Android utilice
+    el teclado de texto estándar, que incluye
+    números y la tecla Enter.
+*/
 
-    .small-btn,
-    .action-btn {
+input {
 
-        font-size: 13px;
-    }
+    font-size: 16px;
 
+    -webkit-appearance: none;
+
+    appearance: none;
 }
 
 </style>
@@ -787,6 +795,10 @@ button {
 
 <div class="container">
 
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
 
 <header>
 
@@ -802,13 +814,15 @@ button {
 
 
 <!-- =====================================================
-     FORMULARIO
+     AGREGAR PRODUCTO
 ====================================================== -->
 
 <div class="add-box">
 
     <div class="form-row">
 
+
+        <!-- PRODUCTO -->
 
         <input
             type="text"
@@ -820,31 +834,29 @@ button {
 
 
         <!--
-            IMPORTANTE:
+            PRECIO
 
-            Usamos type="text" en vez de number.
+            Se utiliza type="text"
+            y NO inputmode.
 
-            Esto permite que el teclado móvil
-            conserve la tecla Enter.
-
-            inputmode="text" hace que aparezca
-            el teclado normal con Enter.
-
-            JavaScript se encarga de aceptar
-            únicamente números.
+            De esta forma el dispositivo
+            utiliza su teclado de texto estándar,
+            manteniendo la tecla Enter.
         -->
 
         <input
             type="text"
             id="productPrice"
             placeholder="$ Precio"
-            inputmode="text"
-            enterkeyhint="done"
             autocomplete="off"
             autocorrect="off"
+            autocapitalize="off"
             spellcheck="false"
+            enterkeyhint="done"
         >
 
+
+        <!-- AGREGAR -->
 
         <button
             class="add-btn"
@@ -887,14 +899,14 @@ button {
 <div class="lists">
 
 
-    <!-- PERSONA 1 -->
+    <!-- LISTA 1 -->
 
     <div class="person">
 
         <div class="person-header">
 
             <h2>
-                👤 Persona 1
+                🛒 Lista 1
             </h2>
 
             <div
@@ -915,14 +927,14 @@ button {
     </div>
 
 
-    <!-- PERSONA 2 -->
+    <!-- LISTA 2 -->
 
     <div class="person">
 
         <div class="person-header">
 
             <h2>
-                👤 Persona 2
+                🛒 Lista 2
             </h2>
 
             <div
@@ -984,7 +996,7 @@ button {
 
 
 <!-- =====================================================
-     MODAL
+     MODAL BORRAR
 ====================================================== -->
 
 <div
@@ -1040,7 +1052,7 @@ let nextId = 1;
 
 
 /* =========================================================
-   MONEDA
+   FORMATO MONEDA
 ========================================================= */
 
 function money(value) {
@@ -1059,7 +1071,7 @@ function money(value) {
 
 
 /* =========================================================
-   CARGAR
+   CARGAR DATOS
 ========================================================= */
 
 function loadData() {
@@ -1142,9 +1154,7 @@ function addProduct() {
 
 
     /*
-        Limpiar precio.
-
-        Aceptamos:
+        Aceptar:
 
         25
         25.50
@@ -1164,6 +1174,8 @@ function addProduct() {
         parseFloat(priceText);
 
 
+    /* Validar producto */
+
     if (!name) {
 
         nameInput.focus();
@@ -1172,6 +1184,8 @@ function addProduct() {
 
     }
 
+
+    /* Validar precio */
 
     if (
         isNaN(price) ||
@@ -1185,7 +1199,7 @@ function addProduct() {
     }
 
 
-    /* Crear producto */
+    /* Crear */
 
     products.push({
 
@@ -1208,14 +1222,14 @@ function addProduct() {
 
 
     /*
-        Reequilibrar automáticamente.
+        Equilibrar automáticamente.
     */
 
     balanceProducts(false);
 
 
     /*
-        VOLVER AL CAMPO PRODUCTO
+        Volver al producto.
     */
 
     nameInput.focus();
@@ -1308,6 +1322,12 @@ function balanceProducts(
         total / 2;
 
 
+    /*
+        Convertimos a centavos
+        para evitar problemas
+        con decimales.
+    */
+
     const items =
         products.map(
             product => ({
@@ -1330,9 +1350,7 @@ function balanceProducts(
 
 
     /*
-        Programación dinámica
-        para encontrar la combinación
-        más cercana a la mitad.
+        Programación dinámica.
     */
 
     const dp =
@@ -1391,6 +1409,11 @@ function balanceProducts(
     }
 
 
+    /*
+        Encontrar suma más cercana
+        a la mitad.
+    */
+
     let bestSum = 0;
 
 
@@ -1420,11 +1443,19 @@ function balanceProducts(
     }
 
 
+    /*
+        Productos de Lista 1.
+    */
+
     const selectedIds =
         new Set(
             dp.get(bestSum)
         );
 
+
+    /*
+        El resto va a Lista 2.
+    */
 
     products.forEach(
         product => {
@@ -1531,6 +1562,10 @@ function render() {
     let total2 = 0;
 
 
+    /*
+        Calcular totales.
+    */
+
     products.forEach(
         product => {
 
@@ -1554,6 +1589,10 @@ function render() {
     );
 
 
+    /*
+        Lista 1.
+    */
+
     products
         .filter(
             product =>
@@ -1572,6 +1611,10 @@ function render() {
         );
 
 
+    /*
+        Lista 2.
+    */
+
     products
         .filter(
             product =>
@@ -1589,6 +1632,10 @@ function render() {
             }
         );
 
+
+    /*
+        Vacío.
+    */
 
     if (
 
@@ -1624,11 +1671,19 @@ function render() {
     }
 
 
+    /*
+        Diferencia.
+    */
+
     const difference =
         Math.abs(
             total1 - total2
         );
 
+
+    /*
+        Actualizar interfaz.
+    */
 
     document.getElementById(
         "total1"
@@ -1693,6 +1748,7 @@ function createProductElement(
 
         <div class="product-actions">
 
+
             <button
                 class="small-btn"
                 type="button"
@@ -1722,6 +1778,7 @@ function createProductElement(
             >
                 ×
             </button>
+
 
         </div>
 
@@ -1754,7 +1811,7 @@ function escapeHTML(text) {
 
 
 /* =========================================================
-   CAMPO PRODUCTO
+   PRODUCTO
    ENTER → PRECIO
 ========================================================= */
 
@@ -1791,7 +1848,7 @@ document
 
 
 /* =========================================================
-   CAMPO PRECIO
+   PRECIO
    ENTER → AGREGAR
 ========================================================= */
 
@@ -1818,7 +1875,7 @@ document
 
 
 /* =========================================================
-   PRECIO: PERMITIR SOLO NÚMEROS
+   LIMPIAR CARACTERES NO VÁLIDOS
 ========================================================= */
 
 document
@@ -1830,22 +1887,19 @@ document
         function() {
 
             /*
-                Permitimos:
+                Permitimos solamente:
 
-                números
-                punto
-                coma
-
-                y eliminamos
-                cualquier otra cosa.
+                0-9
+                .
+                ,
+                $
             */
 
             this.value =
-                this.value
-                    .replace(
-                        /[^0-9.,]/g,
-                        ""
-                    );
+                this.value.replace(
+                    /[^0-9.,$]/g,
+                    ""
+                );
 
         }
     );
