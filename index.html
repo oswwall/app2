@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
@@ -25,6 +26,7 @@
 
 body {
     margin: 0;
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -34,13 +36,17 @@ body {
         sans-serif;
 
     background: #f4f6f8;
+
     color: #1d252c;
 }
 
 .container {
     width: 100%;
+
     max-width: 1000px;
+
     margin: auto;
+
     padding: 20px;
 }
 
@@ -51,28 +57,35 @@ body {
 
 header {
     text-align: center;
+
     margin-bottom: 25px;
 }
 
 header h1 {
     margin: 0;
+
     font-size: 30px;
+
     font-weight: 800;
 }
 
 header p {
     margin: 7px 0 0;
+
     color: #68737d;
 }
 
 
 /* =========================================================
-   FORMULARIO
+   AGREGAR PRODUCTO
 ========================================================= */
 
 .add-box {
+
     background: white;
+
     padding: 18px;
+
     border-radius: 16px;
 
     box-shadow:
@@ -82,12 +95,17 @@ header p {
 }
 
 .form-row {
+
     display: flex;
+
     gap: 10px;
 }
 
 .form-row input {
-    border: 1px solid #d7dce1;
+
+    border:
+        1px solid #d7dce1;
+
     border-radius: 10px;
 
     padding: 13px;
@@ -102,14 +120,17 @@ header p {
 }
 
 .form-row input:focus {
+
     border-color: #1677ff;
 }
 
 #productName {
+
     flex: 1;
 }
 
 #productPrice {
+
     width: 150px;
 }
 
@@ -119,10 +140,13 @@ header p {
 ========================================================= */
 
 button {
+
     border: none;
+
     cursor: pointer;
 
     font-size: 15px;
+
     font-weight: 700;
 
     border-radius: 10px;
@@ -131,11 +155,14 @@ button {
 }
 
 .add-btn {
+
     background: #1677ff;
+
     color: white;
 }
 
 .add-btn:hover {
+
     background: #0868e7;
 }
 
@@ -145,9 +172,11 @@ button {
 ========================================================= */
 
 .summary {
+
     display: flex;
 
     align-items: center;
+
     justify-content: flex-end;
 
     gap: 6px;
@@ -162,10 +191,12 @@ button {
 }
 
 .summary-title {
+
     font-weight: 500;
 }
 
 .summary-difference {
+
     font-weight: 700;
 
     color: #69747e;
@@ -177,6 +208,7 @@ button {
 ========================================================= */
 
 .lists {
+
     display: grid;
 
     grid-template-columns:
@@ -186,6 +218,7 @@ button {
 }
 
 .person {
+
     background: white;
 
     border-radius: 16px;
@@ -202,6 +235,7 @@ button {
 ========================================================= */
 
 .person-header {
+
     padding: 18px;
 
     background: #f7f8fa;
@@ -211,12 +245,14 @@ button {
 }
 
 .person-header h2 {
+
     margin: 0;
 
     font-size: 19px;
 }
 
 .person-total {
+
     margin-top: 7px;
 
     font-size: 26px;
@@ -228,16 +264,18 @@ button {
 
 
 /* =========================================================
-   LISTA PRODUCTOS
+   PRODUCTOS
 ========================================================= */
 
 .product-list {
+
     padding: 10px;
 
     min-height: 100px;
 }
 
 .product {
+
     display: flex;
 
     align-items: center;
@@ -254,16 +292,19 @@ button {
 }
 
 .product:last-child {
+
     border-bottom: none;
 }
 
 .product-info {
+
     min-width: 0;
 
     flex: 1;
 }
 
 .product-name {
+
     font-size: 15px;
 
     font-weight: 600;
@@ -272,6 +313,7 @@ button {
 }
 
 .product-price {
+
     font-size: 14px;
 
     color: #69747e;
@@ -281,10 +323,11 @@ button {
 
 
 /* =========================================================
-   BOTONES PRODUCTO
+   BOTONES DE PRODUCTO
 ========================================================= */
 
 .product-actions {
+
     display: flex;
 
     gap: 5px;
@@ -293,7 +336,9 @@ button {
 }
 
 .small-btn {
+
     width: 34px;
+
     height: 34px;
 
     padding: 0;
@@ -306,19 +351,22 @@ button {
 }
 
 .small-btn:hover {
+
     background: #e3e6e9;
 }
 
 .delete-btn {
+
     color: #d92828;
 }
 
 
 /* =========================================================
-   LISTA VACÍA
+   VACÍO
 ========================================================= */
 
 .empty {
+
     text-align: center;
 
     color: #9aa2a9;
@@ -331,10 +379,11 @@ button {
 
 
 /* =========================================================
-   ACCIONES FINALES
+   ACCIONES
 ========================================================= */
 
 .bottom-actions {
+
     display: flex;
 
     gap: 10px;
@@ -343,6 +392,7 @@ button {
 }
 
 .action-btn {
+
     flex: 1;
 
     background: white;
@@ -353,13 +403,27 @@ button {
     color: #26313a;
 }
 
-.balance-btn {
-    background: #202830;
 
-    color: white;
+/* REEQUILIBRAR - COLOR MÁS SUAVE */
+
+.balance-btn {
+
+    background: #e9edf0;
+
+    color: #46515a;
+
+    border:
+        1px solid #d9dee2;
 }
 
+.balance-btn:hover {
+
+    background: #dde2e6;
+}
+
+
 .delete-all {
+
     background: white;
 
     border:
@@ -374,6 +438,7 @@ button {
 ========================================================= */
 
 .modal-background {
+
     display: none;
 
     position: fixed;
@@ -393,6 +458,7 @@ button {
 }
 
 .modal {
+
     background: white;
 
     width: 100%;
@@ -405,10 +471,12 @@ button {
 }
 
 .modal h3 {
+
     margin-top: 0;
 }
 
 .modal-buttons {
+
     display: flex;
 
     gap: 10px;
@@ -417,14 +485,17 @@ button {
 }
 
 .modal-buttons button {
+
     flex: 1;
 }
 
 .cancel {
+
     background: #edf0f2;
 }
 
 .confirm {
+
     background: #d92828;
 
     color: white;
@@ -432,27 +503,29 @@ button {
 
 
 /* =========================================================
-   RESPONSIVE CELULAR
+   RESPONSIVE
 ========================================================= */
 
 @media (max-width: 700px) {
 
     .container {
+
         padding: 10px;
     }
 
 
-    /* HEADER */
-
     header {
+
         margin-bottom: 15px;
     }
 
     header h1 {
+
         font-size: 24px;
     }
 
     header p {
+
         font-size: 13px;
     }
 
@@ -460,6 +533,7 @@ button {
     /* FORMULARIO */
 
     .add-box {
+
         padding: 12px;
 
         border-radius: 13px;
@@ -476,10 +550,12 @@ button {
     }
 
     #productPrice {
+
         width: 100%;
     }
 
     .add-btn {
+
         grid-column:
             1 / -1;
     }
@@ -566,7 +642,7 @@ button {
     }
 
 
-    /* BOTONES PRODUCTO */
+    /* BOTONES */
 
     .product-actions {
 
@@ -576,6 +652,7 @@ button {
     .small-btn {
 
         width: 27px;
+
         height: 27px;
 
         font-size: 13px;
@@ -584,7 +661,7 @@ button {
     }
 
 
-    /* BOTONES FINALES */
+    /* ACCIONES */
 
     .bottom-actions {
 
@@ -612,56 +689,69 @@ button {
 
 
 /* =========================================================
-   CELULARES MUY PEQUEÑOS
+   CELULARES PEQUEÑOS
 ========================================================= */
 
 @media (max-width: 380px) {
 
     .container {
+
         padding: 7px;
     }
 
     header h1 {
+
         font-size: 22px;
     }
 
     .lists {
+
         gap: 5px;
     }
 
     .person-header {
+
         padding:
             10px 6px;
     }
 
     .person-header h2 {
+
         font-size: 12px;
     }
 
     .person-total {
+
         font-size: 18px;
     }
 
     .product-list {
+
         padding: 4px;
     }
 
     .product {
+
         padding:
             8px 2px;
     }
 
     .product-name {
+
         font-size: 12px;
     }
 
     .product-price {
+
         font-size: 11px;
     }
 
     .small-btn {
+
         width: 24px;
+
         height: 24px;
+
         font-size: 12px;
     }
 
@@ -669,17 +759,19 @@ button {
 
 
 /* =========================================================
-   EVITAR ZOOM EN INPUTS IOS
+   TAMAÑO INPUTS EN IOS
 ========================================================= */
 
 @media (max-width: 700px) {
 
     input {
+
         font-size: 16px;
     }
 
     .small-btn,
     .action-btn {
+
         font-size: 13px;
     }
 
@@ -696,191 +788,157 @@ button {
 <div class="container">
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+<header>
 
-    <header>
+    <h1>
+        🛒 Divide la Cuenta
+    </h1>
 
-        <h1>
-            🛒 Divide la Cuenta
-        </h1>
+    <p>
+        Reparte las compras de la forma más equilibrada posible.
+    </p>
 
-        <p>
-            Reparte las compras de la forma más equilibrada posible.
-        </p>
-
-    </header>
+</header>
 
 
-    <!-- =====================================================
-         AGREGAR PRODUCTO
-    ====================================================== -->
+<!-- =====================================================
+     FORMULARIO
+====================================================== -->
 
-    <div class="add-box">
+<div class="add-box">
 
-        <div class="form-row">
-
-
-            <!-- PRODUCTO -->
-
-            <input
-                type="text"
-                id="productName"
-                placeholder="Nombre del producto"
-                autocomplete="off"
-                enterkeyhint="next"
-            >
+    <div class="form-row">
 
 
-            <!-- PRECIO -->
-
-            <input
-                type="text"
-                id="productPrice"
-                placeholder="$ Precio"
-                inputmode="decimal"
-                enterkeyhint="done"
-                autocomplete="off"
-            >
-
-
-            <!-- AGREGAR -->
-
-            <button
-                class="add-btn"
-                type="button"
-                onclick="addProduct()"
-            >
-                + Agregar
-            </button>
-
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         DIFERENCIA
-    ====================================================== -->
-
-    <div class="summary">
-
-        <span class="summary-title">
-            Diferencia:
-        </span>
-
-        <span
-            class="summary-difference"
-            id="difference"
+        <input
+            type="text"
+            id="productName"
+            placeholder="Nombre del producto"
+            autocomplete="off"
+            enterkeyhint="next"
         >
-            $0
-        </span>
-
-    </div>
 
 
-    <!-- =====================================================
-         LISTAS
-    ====================================================== -->
+        <!--
+            IMPORTANTE:
 
-    <div class="lists">
+            Usamos type="text" en vez de number.
 
+            Esto permite que el teclado móvil
+            conserve la tecla Enter.
 
-        <!-- PERSONA 1 -->
+            inputmode="text" hace que aparezca
+            el teclado normal con Enter.
 
-        <div class="person">
+            JavaScript se encarga de aceptar
+            únicamente números.
+        -->
 
-
-            <div class="person-header">
-
-                <h2>
-                    👤 Persona 1
-                </h2>
-
-                <div
-                    class="person-total"
-                    id="total1"
-                >
-                    $0
-                </div>
-
-            </div>
-
-
-            <div
-                class="product-list"
-                id="list1"
-            ></div>
-
-
-        </div>
-
-
-        <!-- PERSONA 2 -->
-
-        <div class="person">
-
-
-            <div class="person-header">
-
-                <h2>
-                    👤 Persona 2
-                </h2>
-
-                <div
-                    class="person-total"
-                    id="total2"
-                >
-                    $0
-                </div>
-
-            </div>
-
-
-            <div
-                class="product-list"
-                id="list2"
-            ></div>
-
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =====================================================
-         ACCIONES
-    ====================================================== -->
-
-    <div class="bottom-actions">
+        <input
+            type="text"
+            id="productPrice"
+            placeholder="$ Precio"
+            inputmode="text"
+            enterkeyhint="done"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+        >
 
 
         <button
-            class="
-                action-btn
-                balance-btn
-            "
+            class="add-btn"
             type="button"
-            onclick="balanceProducts()"
+            onclick="addProduct()"
         >
-            ⚖️ Reequilibrar
+            + Agregar
         </button>
 
 
-        <button
-            class="
-                action-btn
-                delete-all
-            "
-            type="button"
-            onclick="openDeleteModal()"
-        >
-            🗑️ Borrar todo
-        </button>
+    </div>
 
+</div>
+
+
+<!-- =====================================================
+     DIFERENCIA
+====================================================== -->
+
+<div class="summary">
+
+    <span class="summary-title">
+        Diferencia:
+    </span>
+
+    <span
+        class="summary-difference"
+        id="difference"
+    >
+        $0
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     LISTAS
+====================================================== -->
+
+<div class="lists">
+
+
+    <!-- PERSONA 1 -->
+
+    <div class="person">
+
+        <div class="person-header">
+
+            <h2>
+                👤 Persona 1
+            </h2>
+
+            <div
+                class="person-total"
+                id="total1"
+            >
+                $0
+            </div>
+
+        </div>
+
+
+        <div
+            class="product-list"
+            id="list1"
+        ></div>
+
+    </div>
+
+
+    <!-- PERSONA 2 -->
+
+    <div class="person">
+
+        <div class="person-header">
+
+            <h2>
+                👤 Persona 2
+            </h2>
+
+            <div
+                class="person-total"
+                id="total2"
+            >
+                $0
+            </div>
+
+        </div>
+
+
+        <div
+            class="product-list"
+            id="list2"
+        ></div>
 
     </div>
 
@@ -888,32 +946,64 @@ button {
 </div>
 
 
-<!-- =========================================================
-     MODAL BORRAR
-========================================================= -->
+<!-- =====================================================
+     BOTONES FINALES
+====================================================== -->
+
+<div class="bottom-actions">
+
+
+    <button
+        class="
+            action-btn
+            balance-btn
+        "
+        type="button"
+        onclick="balanceProducts()"
+    >
+        ⚖️ Reequilibrar
+    </button>
+
+
+    <button
+        class="
+            action-btn
+            delete-all
+        "
+        type="button"
+        onclick="openDeleteModal()"
+    >
+        🗑️ Borrar todo
+    </button>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     MODAL
+====================================================== -->
 
 <div
     class="modal-background"
     id="deleteModal"
 >
 
-
     <div class="modal">
-
 
         <h3>
             ¿Borrar todos los productos?
         </h3>
-
 
         <p>
             Se eliminarán todos los productos y se
             reiniciará la distribución.
         </p>
 
-
         <div class="modal-buttons">
-
 
             <button
                 class="cancel"
@@ -923,7 +1013,6 @@ button {
                 Cancelar
             </button>
 
-
             <button
                 class="confirm"
                 type="button"
@@ -932,12 +1021,9 @@ button {
                 Sí, borrar
             </button>
 
-
         </div>
 
-
     </div>
-
 
 </div>
 
@@ -954,7 +1040,7 @@ let nextId = 1;
 
 
 /* =========================================================
-   FORMATO DE MONEDA
+   MONEDA
 ========================================================= */
 
 function money(value) {
@@ -973,7 +1059,7 @@ function money(value) {
 
 
 /* =========================================================
-   CARGAR DATOS
+   CARGAR
 ========================================================= */
 
 function loadData() {
@@ -1020,7 +1106,7 @@ function loadData() {
 
 
 /* =========================================================
-   GUARDAR DATOS
+   GUARDAR
 ========================================================= */
 
 function saveData() {
@@ -1056,7 +1142,9 @@ function addProduct() {
 
 
     /*
-        Admitimos:
+        Limpiar precio.
+
+        Aceptamos:
 
         25
         25.50
@@ -1068,17 +1156,13 @@ function addProduct() {
     let priceText =
         priceInput.value
             .trim()
-            .replace("$", "")
+            .replace(/\$/g, "")
             .replace(",", ".");
 
 
     const price =
         parseFloat(priceText);
 
-
-    /*
-        Validar nombre.
-    */
 
     if (!name) {
 
@@ -1088,10 +1172,6 @@ function addProduct() {
 
     }
 
-
-    /*
-        Validar precio.
-    */
 
     if (
         isNaN(price) ||
@@ -1105,9 +1185,7 @@ function addProduct() {
     }
 
 
-    /*
-        Crear producto.
-    */
+    /* Crear producto */
 
     products.push({
 
@@ -1122,9 +1200,7 @@ function addProduct() {
     });
 
 
-    /*
-        Limpiar campos.
-    */
+    /* Limpiar */
 
     nameInput.value = "";
 
@@ -1139,8 +1215,7 @@ function addProduct() {
 
 
     /*
-        Volver automáticamente
-        al campo Producto.
+        VOLVER AL CAMPO PRODUCTO
     */
 
     nameInput.focus();
@@ -1221,10 +1296,6 @@ function balanceProducts(
     }
 
 
-    /*
-        Total de todos los productos.
-    */
-
     const total =
         products.reduce(
             (sum, product) =>
@@ -1233,19 +1304,9 @@ function balanceProducts(
         );
 
 
-    /*
-        Objetivo:
-        la mitad del total.
-    */
-
     const target =
         total / 2;
 
-
-    /*
-        Convertimos a centavos
-        para trabajar con precisión.
-    */
 
     const items =
         products.map(
@@ -1269,7 +1330,9 @@ function balanceProducts(
 
 
     /*
-        Programación dinámica.
+        Programación dinámica
+        para encontrar la combinación
+        más cercana a la mitad.
     */
 
     const dp =
@@ -1328,11 +1391,6 @@ function balanceProducts(
     }
 
 
-    /*
-        Encontrar la combinación
-        más cercana a la mitad.
-    */
-
     let bestSum = 0;
 
 
@@ -1362,19 +1420,11 @@ function balanceProducts(
     }
 
 
-    /*
-        Productos de Persona 1.
-    */
-
     const selectedIds =
         new Set(
             dp.get(bestSum)
         );
 
-
-    /*
-        Distribuir.
-    */
 
     products.forEach(
         product => {
@@ -1481,10 +1531,6 @@ function render() {
     let total2 = 0;
 
 
-    /*
-        Calcular totales.
-    */
-
     products.forEach(
         product => {
 
@@ -1508,10 +1554,6 @@ function render() {
     );
 
 
-    /*
-        Persona 1.
-    */
-
     products
         .filter(
             product =>
@@ -1529,10 +1571,6 @@ function render() {
             }
         );
 
-
-    /*
-        Persona 2.
-    */
 
     products
         .filter(
@@ -1552,10 +1590,6 @@ function render() {
         );
 
 
-    /*
-        Vacío Persona 1.
-    */
-
     if (
 
         products.filter(
@@ -1572,10 +1606,6 @@ function render() {
 
     }
 
-
-    /*
-        Vacío Persona 2.
-    */
 
     if (
 
@@ -1594,19 +1624,11 @@ function render() {
     }
 
 
-    /*
-        Diferencia.
-    */
-
     const difference =
         Math.abs(
             total1 - total2
         );
 
-
-    /*
-        Actualizar.
-    */
 
     document.getElementById(
         "total1"
@@ -1651,22 +1673,25 @@ function createProductElement(
         <div class="product-info">
 
             <div class="product-name">
+
                 ${escapeHTML(
                     product.name
                 )}
+
             </div>
 
             <div class="product-price">
+
                 ${money(
                     product.price
                 )}
+
             </div>
 
         </div>
 
 
         <div class="product-actions">
-
 
             <button
                 class="small-btn"
@@ -1698,7 +1723,6 @@ function createProductElement(
                 ×
             </button>
 
-
         </div>
 
     `;
@@ -1710,7 +1734,7 @@ function createProductElement(
 
 
 /* =========================================================
-   PROTEGER TEXTO
+   PROTEGER HTML
 ========================================================= */
 
 function escapeHTML(text) {
@@ -1730,8 +1754,8 @@ function escapeHTML(text) {
 
 
 /* =========================================================
-   ENTER EN PRODUCTO
-   → IR A PRECIO
+   CAMPO PRODUCTO
+   ENTER → PRECIO
 ========================================================= */
 
 document
@@ -1758,11 +1782,6 @@ document
                 priceInput.focus();
 
 
-                /*
-                    Seleccionar cualquier
-                    contenido existente.
-                */
-
                 priceInput.select();
 
             }
@@ -1772,9 +1791,8 @@ document
 
 
 /* =========================================================
-   PRECIO
-   → ENTER / GO / DONE
-   → AGREGAR PRODUCTO
+   CAMPO PRECIO
+   ENTER → AGREGAR
 ========================================================= */
 
 document
@@ -1786,11 +1804,7 @@ document
         function(event) {
 
             if (
-
-                event.key === "Enter" ||
-
-                event.key === "Go"
-
+                event.key === "Enter"
             ) {
 
                 event.preventDefault();
@@ -1804,13 +1818,46 @@ document
 
 
 /* =========================================================
+   PRECIO: PERMITIR SOLO NÚMEROS
+========================================================= */
+
+document
+    .getElementById(
+        "productPrice"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            /*
+                Permitimos:
+
+                números
+                punto
+                coma
+
+                y eliminamos
+                cualquier otra cosa.
+            */
+
+            this.value =
+                this.value
+                    .replace(
+                        /[^0-9.,]/g,
+                        ""
+                    );
+
+        }
+    );
+
+
+/* =========================================================
    INICIAR
 ========================================================= */
 
 loadData();
 
 </script>
-
 
 </body>
 </html>
