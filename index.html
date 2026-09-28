@@ -231,16 +231,6 @@ header p {
     font-size: 19px;
 }
 
-.person-total {
-    margin-top: 7px;
-
-    font-size: 26px;
-
-    font-weight: 800;
-
-    color: #1677ff;
-}
-
 
 /* =========================================================
    PRODUCTOS
@@ -331,6 +321,40 @@ header p {
 
 .delete-btn {
     color: #d92828;
+}
+
+
+/* =========================================================
+   TOTAL DE CADA LISTA
+========================================================= */
+
+.list-total {
+    margin:
+        10px 8px
+        4px;
+
+    padding-top: 10px;
+
+    border-top:
+        1px solid #dfe3e6;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #303941;
+}
+
+.list-total-value {
+    color: #1677ff;
+
+    font-size: 18px;
 }
 
 
@@ -508,7 +532,9 @@ header p {
     }
 
 
-    /* FORMULARIO */
+    /* =========================================
+       FORMULARIO EN VERTICAL
+    ========================================= */
 
     .add-box {
         padding: 12px;
@@ -517,102 +543,154 @@ header p {
     }
 
     .form-row {
-        display: grid;
 
-        grid-template-columns:
-            1fr 100px;
+        display: flex;
+
+        flex-direction: column;
 
         gap: 8px;
+
     }
+
+
+    /*
+        Producto arriba
+    */
+
+    #productName {
+
+        width: 100%;
+
+        flex: none;
+
+    }
+
+
+    /*
+        Precio debajo
+    */
 
     #productPrice {
+
         width: 100%;
+
     }
+
+
+    /*
+        Botón agregar debajo
+    */
 
     .add-btn {
-        grid-column:
-            1 / -1;
+
+        width: 100%;
+
     }
 
 
-    /* DIFERENCIA */
+    /* =========================================
+       DIFERENCIA
+    ========================================= */
 
     .summary {
+
         font-size: 12px;
 
         margin:
             0 3px
             8px;
+
     }
 
 
-    /* DOS COLUMNAS */
+    /* =========================================
+       DOS COLUMNAS
+    ========================================= */
 
     .lists {
+
         grid-template-columns:
             1fr 1fr;
 
         gap: 8px;
+
     }
 
 
-    /* LISTAS */
+    /* =========================================
+       LISTAS
+    ========================================= */
 
     .person {
+
         border-radius: 12px;
+
     }
 
     .person-header {
+
         padding:
             12px 8px;
+
     }
 
     .person-header h2 {
+
         font-size: 14px;
 
         white-space: nowrap;
-    }
 
-    .person-total {
-        font-size: 20px;
-
-        margin-top: 5px;
     }
 
 
-    /* PRODUCTOS */
+    /* =========================================
+       PRODUCTOS
+    ========================================= */
 
     .product-list {
+
         padding: 6px;
+
     }
 
     .product {
+
         padding:
             9px 3px;
 
         gap: 4px;
+
     }
 
     .product-name {
+
         font-size: 13px;
 
         line-height: 1.2;
+
     }
 
     .product-price {
+
         font-size: 12px;
 
         margin-top: 2px;
+
     }
 
 
-    /* BOTONES */
+    /* =========================================
+       BOTONES PRODUCTO
+    ========================================= */
 
     .product-actions {
+
         gap: 3px;
+
     }
 
     .small-btn {
+
         width: 27px;
 
         height: 27px;
@@ -620,12 +698,39 @@ header p {
         font-size: 13px;
 
         border-radius: 6px;
+
     }
 
 
-    /* BOTONES FINALES */
+    /* =========================================
+       TOTAL LISTA
+    ========================================= */
+
+    .list-total {
+
+        margin:
+            8px 5px
+            3px;
+
+        padding-top: 8px;
+
+        font-size: 13px;
+
+    }
+
+    .list-total-value {
+
+        font-size: 15px;
+
+    }
+
+
+    /* =========================================
+       BOTONES FINALES
+    ========================================= */
 
     .bottom-actions {
+
         display: grid;
 
         grid-template-columns:
@@ -634,15 +739,18 @@ header p {
         gap: 8px;
 
         margin-top: 12px;
+
     }
 
     .action-btn {
+
         min-width: 0;
 
         padding:
             11px 5px;
 
         font-size: 13px;
+
     }
 
 }
@@ -655,53 +763,85 @@ header p {
 @media (max-width: 380px) {
 
     .container {
+
         padding: 7px;
+
     }
 
     header h1 {
+
         font-size: 22px;
+
     }
 
     .lists {
+
         gap: 5px;
+
     }
 
     .person-header {
+
         padding:
             10px 6px;
+
     }
 
     .person-header h2 {
-        font-size: 12px;
-    }
 
-    .person-total {
-        font-size: 18px;
+        font-size: 12px;
+
     }
 
     .product-list {
+
         padding: 4px;
+
     }
 
     .product {
+
         padding:
             8px 2px;
+
     }
 
     .product-name {
+
         font-size: 12px;
+
     }
 
     .product-price {
+
         font-size: 11px;
+
     }
 
     .small-btn {
+
         width: 24px;
 
         height: 24px;
 
         font-size: 12px;
+
+    }
+
+    .list-total {
+
+        margin:
+            7px 3px
+            2px;
+
+        font-size: 12px;
+
+    }
+
+    .list-total-value {
+
+        font-size: 14px;
+
     }
 
 }
@@ -712,11 +852,13 @@ header p {
 ========================================================= */
 
 input {
+
     font-size: 16px;
 
     -webkit-appearance: none;
 
     appearance: none;
+
 }
 
 </style>
@@ -756,11 +898,7 @@ input {
     <div class="form-row">
 
 
-        <!--
-            PRODUCTO
-
-            Enter → pasa al precio
-        -->
+        <!-- PRODUCTO -->
 
         <input
             type="text"
@@ -776,19 +914,7 @@ input {
         >
 
 
-        <!--
-            PRECIO
-
-            IMPORTANTE:
-
-            type="number" es intencional.
-
-            Esto reproduce el comportamiento
-            del código que comprobaste que sí
-            funciona correctamente en celular.
-
-            Enter → agrega el producto.
-        -->
+        <!-- PRECIO -->
 
         <input
             type="number"
@@ -803,6 +929,8 @@ input {
             enterkeyhint="done"
         >
 
+
+        <!-- AGREGAR -->
 
         <button
             class="add-btn"
@@ -845,7 +973,9 @@ input {
 <div class="lists">
 
 
-    <!-- LISTA 1 -->
+    <!-- =================================================
+         LISTA 1
+    ================================================== -->
 
     <div class="person">
 
@@ -855,13 +985,6 @@ input {
                 🛒 Lista 1
             </h2>
 
-            <div
-                class="person-total"
-                id="total1"
-            >
-                $0
-            </div>
-
         </div>
 
 
@@ -870,10 +993,30 @@ input {
             id="list1"
         ></div>
 
+
+        <!-- TOTAL LISTA 1 -->
+
+        <div class="list-total">
+
+            <span>
+                Total
+            </span>
+
+            <span
+                class="list-total-value"
+                id="total1"
+            >
+                $0
+            </span>
+
+        </div>
+
     </div>
 
 
-    <!-- LISTA 2 -->
+    <!-- =================================================
+         LISTA 2
+    ================================================== -->
 
     <div class="person">
 
@@ -883,13 +1026,6 @@ input {
                 🛒 Lista 2
             </h2>
 
-            <div
-                class="person-total"
-                id="total2"
-            >
-                $0
-            </div>
-
         </div>
 
 
@@ -897,6 +1033,24 @@ input {
             class="product-list"
             id="list2"
         ></div>
+
+
+        <!-- TOTAL LISTA 2 -->
+
+        <div class="list-total">
+
+            <span>
+                Total
+            </span>
+
+            <span
+                class="list-total-value"
+                id="total2"
+            >
+                $0
+            </span>
+
+        </div>
 
     </div>
 
@@ -942,7 +1096,7 @@ input {
 
 
 <!-- =====================================================
-     MODAL
+     MODAL BORRAR
 ====================================================== -->
 
 <div
@@ -1007,6 +1161,7 @@ function money(value) {
         "es-MX",
         {
             style: "currency",
+
             currency: "MXN",
 
             minimumFractionDigits: 0,
@@ -1038,7 +1193,9 @@ function loadData() {
                 JSON.parse(saved);
 
 
-            if (products.length > 0) {
+            if (
+                products.length > 0
+            ) {
 
                 nextId =
                     Math.max(
@@ -1073,7 +1230,10 @@ function saveData() {
 
     localStorage.setItem(
         "divideCuenta",
-        JSON.stringify(products)
+
+        JSON.stringify(
+            products
+        )
     );
 
 }
@@ -1100,12 +1260,6 @@ function addProduct() {
     const name =
         nameInput.value.trim();
 
-
-    /*
-        Al usar type="number",
-        el navegador ya controla
-        la entrada numérica.
-    */
 
     const price =
         parseFloat(
@@ -1154,7 +1308,7 @@ function addProduct() {
 
 
     /*
-        Limpiar ambos campos.
+        Limpiar campos.
     */
 
     nameInput.value = "";
@@ -1163,10 +1317,9 @@ function addProduct() {
 
 
     /*
-        Reequilibrar inmediatamente.
-
-        Así cada producto nuevo
-        modifica la distribución.
+        Reequilibrar automáticamente
+        cada vez que se agrega
+        un producto.
     */
 
     balanceProducts(false);
@@ -1174,18 +1327,6 @@ function addProduct() {
 
     /*
         Volver al campo Producto.
-
-        Esto permite:
-
-        Producto
-          ↓ Enter
-        Precio
-          ↓ Enter
-        Producto
-          ↓ Enter
-        Precio
-          ↓ Enter
-        ...
     */
 
     nameInput.focus();
@@ -1280,8 +1421,8 @@ function balanceProducts(
 
 
     /*
-        Trabajamos en centavos
-        para obtener mayor precisión.
+        Convertimos a centavos
+        para trabajar con precisión.
     */
 
     const items =
@@ -1308,9 +1449,8 @@ function balanceProducts(
     /*
         Programación dinámica.
 
-        Busca la combinación de productos
-        que deje ambas listas lo más parejas
-        posible.
+        Busca la combinación
+        más cercana a la mitad.
     */
 
     const dp =
@@ -1370,7 +1510,7 @@ function balanceProducts(
 
 
     /*
-        Buscar la combinación
+        Encontrar la suma
         más cercana a la mitad.
     */
 
@@ -1414,8 +1554,8 @@ function balanceProducts(
 
 
     /*
-        Los restantes van
-        a Lista 2.
+        Productos restantes
+        van a Lista 2.
     */
 
     products.forEach(
@@ -1551,7 +1691,7 @@ function render() {
 
 
     /*
-        LISTA 1
+        Lista 1.
     */
 
     products
@@ -1573,7 +1713,7 @@ function render() {
 
 
     /*
-        LISTA 2
+        Lista 2.
     */
 
     products
@@ -1595,7 +1735,7 @@ function render() {
 
 
     /*
-        LISTA 1 VACÍA
+        Mostrar "Sin productos".
     */
 
     if (
@@ -1615,10 +1755,6 @@ function render() {
     }
 
 
-    /*
-        LISTA 2 VACÍA
-    */
-
     if (
 
         products.filter(
@@ -1637,7 +1773,7 @@ function render() {
 
 
     /*
-        DIFERENCIA
+        Diferencia.
     */
 
     const difference =
@@ -1647,7 +1783,7 @@ function render() {
 
 
     /*
-        Actualizar totales
+        Actualizar totales.
     */
 
     document.getElementById(
@@ -1837,7 +1973,7 @@ document
 
 
 /* =========================================================
-   INICIAR APP
+   INICIAR
 ========================================================= */
 
 loadData();
@@ -1846,3 +1982,4 @@ loadData();
 
 </body>
 </html>
+
